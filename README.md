@@ -172,3 +172,131 @@ Snow Man の聖地に関する情報は、
 - データベース（MySQL / PostgreSQLなど）
 - デプロイ先（Heroku / Renderなど）
 - 使用予定のライブラリ
+
+## ER図
+
+
+```mermaid
+erDiagram
+    USER {
+        int id "PK"
+        string name
+        string email
+        datetime ceated_at
+        datetime updated_at
+    }
+
+    SEICHI {
+        int id "PK"
+        int user_id "FK"
+        string location_name "場所名"
+        string description "説明"
+        decimal latitude "緯度"
+        decimal longitude "経度"
+        datetime ceated_at
+        datetime updated_at
+
+    }
+
+    USER_SEICHI {
+      int id "PK"
+      int user_id "FK"
+      int seichi_id "FK"
+      datetime edited_at
+      datetime ceated_at
+      datetime updated_at
+    }
+
+    CATEGORY {
+       int id "PK"
+       string category_name "MV・ロケ地・雑誌撮影・番組・その他"
+       int seichi_id "FK"
+       datetime ceated_at
+       datetime updated_at
+    }
+
+    SEICHI_CATEGORY {
+        int id "PK"
+        int category_id "FK"
+        int seichi_id "FK"
+        datetime ceated_at
+        datetime updated_at
+
+    }
+    WORK{
+       int id "PK"
+       string wark_name"作品名"
+       datetime ceated_at
+       datetime updated_at
+
+    }
+
+    SEICHI_WORK{
+       int id "PK"
+       int work_id  "FK"
+       int seichi_id "FK"
+       datetime ceated_at
+       datetime updated_at
+    }
+
+    MEMBER{
+       int id "PK"
+       int mrmber_name
+       datetime ceated_at
+       datetime updated_at
+    }
+
+    SEICHI_MEMBER{
+       int id "PK"
+       int member_id  "FK"
+       int seichi_id "FK"
+       datetime ceated_at
+       datetime updated_at
+    }
+
+    WORK_MEMBER{
+       int id "PK"
+       int member_id  "FK"
+       int work_id "FK"
+       datetime ceated_at
+       datetime updated_at
+    }
+    WANT_SEICHI{
+       int id "PK"
+       int seichi_id  "FK"
+       int user_id "FK"
+       datetime ceated_at
+       datetime updated_at
+
+    }
+   VISITED_SEICHI{
+       int id "PK"
+       int seichi_id  "FK"
+       int user_id "FK"
+       datetime ceated_at
+       datetime updated_at
+
+    }
+    USER ||--o{ SEICHI : "投稿する"
+    USER ||--o{ USER_SEICHI : "編集する"
+    SEICHI ||--o{ USER_SEICHI : "編集される"
+    SEICHI ||--o{ SEICHI_CATEGORY : "カテゴライズされる"
+    CATEGORY ||--o{ SEICHI_CATEGORY : "カテゴライズする"
+    SEICHI ||--o{  SEICHI_WORK : "複数の作品を持つ"
+    WORK ||--o{ SEICHI_WORK : "作品は複数の聖地を持つ"
+    SEICHI ||--o{  SEICHI_MEMBER : "複数のメンバーを持つ"
+    MEMBER ||--o{ SEICHI_MEMBER : "メンバーは複数の聖地を持つ"
+    WORK ||--o{  WORK_MEMBER : "複数のメンバーを持つ"
+    MEMBER ||--o{ WORK_MEMBER : "メンバーは複数の作品を持つ"
+    USER ||--o{ WANT_SEICHI : "一人のユーザーは複数の行きたい聖地を持てる"
+    SEICHI ||--o{ WANT_SEICHI : "一つの聖地は複数から行きたいと思われる"
+    USER ||--o{ VISITED_SEICHI : "行きたい"
+    SEICHI ||--o{ VISITED_SEICHI : "訪問した"
+
+
+
+
+
+
+
+
