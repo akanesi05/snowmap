@@ -172,3 +172,39 @@ Snow Man の聖地に関する情報は、
 - データベース（MySQL / PostgreSQLなど）
 - デプロイ先（Heroku / Renderなど）
 - 使用予定のライブラリ
+
+## ER図
+
+
+```mermaid
+erDiagram
+    users {
+        int id "PK"
+        string name
+        string email
+        string password_digest
+        datetime created_at
+        datetime updated_at
+    }
+
+    sanctuaries {
+        int id "PK"
+        int user_id "FK"
+        string name "場所名"
+        string explanation
+        string address
+        datetime created_at
+        datetime updated_at
+    }
+
+    user_sanctuaries {
+        int id "PK"
+        int user_id "FK"
+        int sanctuary_id "FK"
+        datetime created_at
+        datetime updated_at
+    }
+
+    users ||--o{ sanctuaries : ""
+    users ||--o{ user_sanctuaries : ""
+    sanctuaries ||--o{ user_sanctuaries : ""
