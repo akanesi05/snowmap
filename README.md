@@ -187,7 +187,7 @@ erDiagram
         datetime updated_at
     }
 
-    sacred_places {
+    sanctuaries {
         int id "PK"
         int user_id "FK"
         string name "場所名"
@@ -195,20 +195,16 @@ erDiagram
         string address
         datetime created_at
         datetime updated_at
-
     }
 
-    user_sacred_places {
-      int id "PK"
-      int user_id "FK"
-      int sacred_places_id "FK"
-      datetime created_at
-      datetime updated_at
+    user_sanctuaries {
+        int id "PK"
+        int user_id "FK"
+        int sanctuary_id "FK"
+        datetime created_at
+        datetime updated_at
     }
 
-   
-    users ||--o{ sacred_places : ""
-    users ||--o{ user_sacred_places : ""
-    sacred_places ||--o{ user_sacred_places : ""
-
-   
+    users ||--o{ sanctuaries : ""
+    users ||--o{ user_sanctuaries : ""
+    sanctuaries ||--o{ user_sanctuaries : ""
