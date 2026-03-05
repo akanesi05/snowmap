@@ -1,210 +1,36 @@
-# スノマップ
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## サービス概要
-土地勘のない人が Snow Man のライブ遠征に行った際、
-開演前や短い滞在時間の空き時間を有効活用し、Snow Man が関わった場所を聖地巡礼できるサービスです。
-現在地をもとに近くの聖地を把握できるため、遠征先でも無理のない範囲で巡礼を楽しむことができます。
+## Getting Started
 
-## このサービスへの思い・作りたい理由
-このサービスを考えたきっかけは、私自身の Snow Man のライブ遠征での体験です。
-初めて長野から国立競技場でのライブに遠征した際、土地勘がなかったこともあり、開演前の時間を会場周辺でただ過ごしてしまいました。
-ライブ自体はとても楽しかったものの、後から振り返ってみると「もし事前に周辺の聖地を知っていたら、短い時間でも巡れたかもしれない」という気持ちが残りました。
-遠征では移動やスケジュールの制約が多く、限られた時間をどう使うかがとても重要になります。それにも関わらず、今いる場所から近い聖地を簡単に知る手段がない ことに不便さを感じました。
-この経験から、「土地勘のない遠征先でも、空き時間を後悔なく使えるサービスがあったらいい」と思い、このサービスを作りたいと考えるようになりました。
-ライブそのものだけでなく、その土地での時間すべてが思い出になるような体験を提供したい、そんな思いを込めて開発しています。
+First, run the development server:
 
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
 
-## ユーザー層について
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-本サービスでは、以下のユーザー層を主な対象としています。
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Learn More
 
-### 遠征オタクのAさん
+To learn more about Next.js, take a look at the following resources:
 
-**基本情報**
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-* 年齢：20代〜40代
-* 性別：女性
-* 立場：Snow Man のファン
-* ITリテラシー：
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-  * Google マップを使って目的地検索や経路確認ができる
-  * スマートフォンアプリの操作に抵抗がない
+## Deploy on Vercel
 
----
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-### このユーザー層を対象にした理由
-
-- Snow Man の聖地巡礼ニーズが高く、サービスのテーマと関心が一致するため
-- ライブ遠征が多く、土地勘のない状況になりやすい（空き時間の課題が発生しやすい）ため
-- Googleマップ利用ができるため、地図UIの学習コストが低いと考えられるため
-- 自身の実体験と重なるユーザー像であり、困りごとや必要機能を具体的に想像しやすいため
-- 
-## サービスの利用イメージ
-ユーザーはライブ遠征前または当日に本サービスを利用します。  
-現在地、もしくはライブ会場周辺を指定すると、今いる場所から近い聖地が地図上に表示**されます。
-距離やカテゴリを見て、短い空き時間でも「行ける場所」を判断しやすくなり、迷う時間を減らせます。  
-結果として、遠征先での空き時間を有効に使え、ライブだけでなくその土地での体験も思い出として残せるようになります。
-
-## ユーザーの獲得について
-本サービスでは、以下の方法でユーザーにサービスを届けることを想定しています。
-
-- 本サービス専用のSNSアカウントを運用し、聖地情報や使い方、利用シーンを発信します
-- 知り合いの Snow Man ファン（ジャニオタ）に使ってもらい、フィードバックを得て改善します
-- 小さなコミュニティでの口コミによる拡散を狙い、無理のない形で継続的に育てていきます
-
-
-## サービスの差別化ポイント・推しポイント
-似たようなサービスが存在する場合、そのサービスとの明確な差別化ポイントとその差別化ポイントのどこが優れているのか教えてください。
-独自性の強いサービスの場合、このサービスの推しとなるポイントを教えてください。
-## サービスの差別化ポイント・推しポイント
-
-Snow Man の聖地に関する情報は、
-個人ブログや記事、SNS 投稿など、すでに点在しています。
-
-しかし、それらと本サービスには明確な違いがあります。
-
----
-
-### ① 「記事を読むサービス」ではなく「行動を助けるサービス」である点
-
-既存の聖地巡礼記事やブログは、
-情報量が多く読み応えがある一方で、
-
-* 今いる場所からどこが近いのか分かりにくい
-* 遠征当日の短い空き時間に使いづらい
-* 地図と照らし合わせる必要がある
-
-といった課題があります。
-
-本サービスは、
-**「読む」ことよりも「すぐ行ける場所を判断する」ことに重点**を置いています。
-
-現在地をもとに近い聖地を表示することで、
-遠征中でも直感的に行動できる点が大きな差別化ポイントです。
-
----
-
-### ② 一人の発信に依存しない、継続可能な形を目指している点
-
-個人ブログや記事は、
-一人の熱量と労力によって支えられているケースが多く、
-
-* 情報更新の負担が大きい
-* 継続が難しい
-* 情報が古くなりやすい
-
-といった問題を抱えやすいと感じています。
-
-本サービスでは、
-一人がすべてを抱え込むのではなく、
-**ファン同士で情報を共有・蓄積していける仕組み**を前提に設計しています。
-
-これにより、
-情報の偏りや更新負荷を分散し、遠征という「時間制限のある状況」に特化している点
-
-既存の情報発信は、
-「いつか行く」「時間に余裕がある」前提で書かれているものが多くあります。
-
-一方、本サービスは
-
-* ライブ遠征
-* 開演前の限られた時間
-* 土地勘のない状況
-
-といった **制約の多いシーンに特化**しています。
-
-「今日はここまで行けるかどうか」
-「今からでも行ける場所はどこか」
-を判断できる点が、このサービスならではの強みです。
-
-## 機能候補
-現状作ろうと思っている機能、案段階の機能をしっかりと固まっていなくても構わないのでMVPリリース時に作っていたいもの、本リリースまでに作っていたいものをそれぞれ分けて教えてください。
-
-### MVP機能
-
-**聖地の投稿機能**  
-
-- ✅ **ログインしている人のみ可能**
-- ✅ **ログインしていれば誰でも編集可能**
-
-- 場所名(例：○○公園、△△ビル前)
-- 作品名
-- カテゴリ（メンバー名前・MV・ロケ地・雑誌撮影・番組・その他）、簡単な説明
-- 位置情報（緯度・経度）地図表示 ピン指定から自動取得
-
-**聖地の一覧表示** 
-
-- 現在地から近い順に並べ替え
-- 距離表示（「ここから○m先」）
-- 地図上での表示
-
-**ユーザー登録・ログイン機能**
-
-- 投稿者を特定するため
-- 不適切な投稿への対応のため
-
-ユーザー登録で必要な情報　名前、メールアドレス、パスワード
-
-**聖地の詳細表示**
-
-- 地図上のピン、または一覧カードをクリックすると**その聖地の投稿情報の詳細を表示**
-
-
-**お気に入り機能**
-
-- 「後で行きたい」リストの作成
-
-### 本リリースで実装したい機能
-
-- 訪問記録（チェックイン）機能
-  - 訪問済み・未訪問管理
-  - 制覇率の可視化
-- ユーザーごとの巡礼履歴（行った場所／行きたい場所の整理）
-- 検索・絞り込み機能の強化（カテゴリ、メンバー等）
-
-
-## 使用する技術スタック
-一般的なCRUD以外の実装予定の機能についてそれぞれどのようなイメージで実装する予定なのか現状考えているもので良いので教えて下さい。
-サービスを実装するための技術スタックについて、以下のような観点で記載してください。
-- 使用するフレームワーク（例：使用するフレームワークのバージョン情報等）
-- データベース（MySQL / PostgreSQLなど）
-- デプロイ先（Heroku / Renderなど）
-- 使用予定のライブラリ
-
-## ER図
-
-
-```mermaid
-erDiagram
-    users {
-        int id "PK"
-        string name
-        string email
-        string password_digest
-        datetime created_at
-        datetime updated_at
-    }
-
-    sanctuaries {
-        int id "PK"
-        int user_id "FK"
-        string name "場所名"
-        string explanation
-        string address
-        datetime created_at
-        datetime updated_at
-    }
-
-    user_sanctuaries {
-        int id "PK"
-        int user_id "FK"
-        int sanctuary_id "FK"
-        datetime created_at
-        datetime updated_at
-    }
-
-    users ||--o{ sanctuaries : ""
-    users ||--o{ user_sanctuaries : ""
-    sanctuaries ||--o{ user_sanctuaries : ""
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
