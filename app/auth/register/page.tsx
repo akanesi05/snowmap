@@ -37,6 +37,9 @@ export default function Page() {
        callbackUrl: "/", 
   });
     }
+    else {
+      alert(data.message || "登録に失敗しました");
+    }
   };
 
   return (

@@ -27,7 +27,6 @@ export async function POST(req: Request) {
 
     return Response.json({ message: "ユーザーが登録されました" });
   } catch (error) {
-    console.error(error)
     return Response.json(
       { error: "登録に失敗しました" },
       { status: 500 }
