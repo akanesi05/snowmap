@@ -2,7 +2,7 @@
 import { signIn } from "next-auth/react";
 
 export default function Page() {
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
