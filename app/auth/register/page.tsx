@@ -1,65 +1,22 @@
 "use client";
 import { signIn } from "next-auth/react";
+import Link from 'next/link'
+import { RegisterForm } from './_components/RegisterForm'
 
-export default function Page() {
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    const formData = new FormData(e.currentTarget);
-
-    const name = formData.get("name")?.toString();
-    const email = formData.get("email")?.toString();
-    const password = formData.get("password")?.toString();
-    if (!email || !password) {
-       alert("メールとパスワードを入力してください");
-       return;
-    }
-
-    const res = await fetch("/api/auth/register", {
-      method: "POST",
-      body: JSON.stringify({
-        name,
-        email,
-        password,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-
-    const data = await res.json();
-
-    if (res.ok) {
-       await signIn("credentials", {
-       email,
-       password,
-       redirect: true,
-       callbackUrl: "/", 
-  });
-    }
-    else {
-      alert(data.message || "登録に失敗しました");
-    }
-  };
-
+export default function RegisterPage() {
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        ユーザ名
-        <input name="name" type="text" />
-      </label>
+     <div className="mx-auto max-w-md py-10">
+      <h1 className="mb-4 text-2xl font-bold">アカウント作成</h1>
+       <p className="mb-10 text-sm">登録をして聖地巡礼の記録を始めよう</p>
+      
+      <RegisterForm />
 
-      <label>
-        メールアドレス
-        <input name="email" type="email" />
-      </label>
-
-      <label>
-        パスワード
-        <input name="password" type="password" />
-      </label>
-
-      <button type="submit">登録</button>
-    </form>
+      <div className="mt-4 text-center text-sm">
+        <span className="text-gray-600">既にアカウントをお持ちの方は</span>
+        <Link href="/auth/login" className="ml-1 text-blue-600 hover:underline">
+            ログイン
+        </Link>
+      </div>
+    </div>
   );
 }
