@@ -1,12 +1,14 @@
 import Link from 'next/link'
 import { LoginForm } from './_components/LoginForm'
+import { Suspense } from 'react'
 
 export default function LoginPage() {
   return (
     <div className="mx-auto max-w-md py-10">
       <h1 className="mb-4 text-2xl font-bold">ログイン</h1>
-      
+      <Suspense fallback={<p>読み込み中...</p>}>
       <LoginForm />
+      </Suspense>
 
       <div className="mt-4 text-center text-sm">
         <span className="text-gray-600">アカウントをお持ちでない方は</span>
