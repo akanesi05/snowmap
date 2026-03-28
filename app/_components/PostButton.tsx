@@ -1,14 +1,4 @@
-// export default function PostButton() {
-//   return (
-//     <main>
-//     <button className="rounded bg-blue-500 text-white px-4 py-2">
-//       投稿
-//     </button>
-//     </main>
-//   );
-// }
 'use client'
-
 import { useRouter } from 'next/navigation'
 
 export default function PostButton() {

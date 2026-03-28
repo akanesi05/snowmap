@@ -1,20 +1,17 @@
 import { NextResponse } from 'next/server'
-import type { NextRequest } from 'next/server'
+import { auth } from '@/lib/auth'
 
-
-export function proxy(request: NextRequest) {
+export default auth((req) => {
+  const isLoggedIn = !!req.auth
  
-  const token = request.cookies.get('token')
-
-  if (!token) {
-    const loginUrl = new URL('/auth/login', request.url)
-    loginUrl.searchParams.set('redirect', request.nextUrl.pathname)
+  if (!isLoggedIn) {
+    const loginUrl = new URL('/auth/login', req.url)
+    loginUrl.searchParams.set('redirect', req.nextUrl.pathname)
     return NextResponse.redirect(loginUrl)
   }
-  
-  return NextResponse.next()
-}
 
+  return NextResponse.next()
+})
 export const config = {
   matcher: [
     '/places/new',         
