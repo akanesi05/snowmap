@@ -2,13 +2,16 @@
 
 import { signIn } from 'next-auth/react'
 import { useRouter, useSearchParams } from 'next/navigation'
+
 import { useState } from 'react'
 
 
 export function LoginForm() {
   const router = useRouter()
+
   const searchParams = useSearchParams()
   const redirectTo = searchParams.get('redirect') || '/'
+
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
 
@@ -31,7 +34,9 @@ export function LoginForm() {
       if (result?.error) {
         setError('メールアドレスまたはパスワードが正しくありません')
       } else {
+
         router.push(redirectTo)
+
         router.refresh()
       }
     } catch (error) {
