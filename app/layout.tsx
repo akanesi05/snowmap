@@ -27,6 +27,7 @@ export default function RootLayout({
       <body>
         <header className='bg-[#355872] text-center py-8'>
         <p>この表示は仮headerタグに記載したテキストです。</p>
+        
         </header>
         {children}
         <footer className='bg-[#355872] text-center py-8'>
