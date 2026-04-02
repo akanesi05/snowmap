@@ -1,4 +1,4 @@
-import PostButton from './_components/PostButton'
+import CreatePlaceButton from './_components/CreatePlaceButton'
 import Link from "next/link";
 
 export default function Home() {
