@@ -9,14 +9,20 @@ type FormValues = {
 }
 export default function PlacesNewPage() {
   const { register, handleSubmit} = useForm<FormValues>({})
-  const submitPlace = (data: FormValues): void => { console.log(data) }
+  const submitPlace = (data: FormValues): void => {
+    fetch("/api/places", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ title: data.title, address: data.address, explanation: data.explanation}),
+      })
+   }
   return (
     <div className="flex">
       <div className="w-2/5 bg-[#020817] h-[600px] p-8">
       <form className="px-6 mt-4 mb-4 w-full" onSubmit={handleSubmit(submitPlace)}>
         <h1 className="text-white text-2xl font-bold mb-4">聖地投稿フォーム</h1>
         <p className="text-white">タイトル</p>
-        <input type="text" {...register('title')} className="mr-6  sm:mr-0  text-black bg-white" />
+        <textarea name="message" {...register('title')} className="mr-6  sm:mr-0  text-black bg-white" />
         <p className="text-white">説明</p>
         <input
           type="text"
