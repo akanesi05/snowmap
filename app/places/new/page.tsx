@@ -31,7 +31,7 @@ export default function PlacesNewPage() {
       <form className="px-6 mt-4 mb-4 w-full" onSubmit={handleSubmit(submitPlace)}>
         <h1 className="text-white text-2xl font-bold mb-4">聖地投稿フォーム</h1>
         <p className="text-white">タイトル</p>
-        <textarea name="message" {...register('title')} className="mr-6  sm:mr-0  text-black bg-white" />
+        <textarea {...register('title')} className="mr-6  sm:mr-0  text-black bg-white" />
         <p className="text-white">説明</p>
         <input
           type="text"
