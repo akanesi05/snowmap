@@ -2,20 +2,29 @@
 import PostButton from "../../_components/PostButton";
 import Image from "next/image";
 import { useForm } from "react-hook-form"
+import { useRouter } from "next/navigation";
 type FormValues = {
     title: string
     explanation: string
     address: string
 }
 export default function PlacesNewPage() {
+  const router = useRouter();
   const { register, handleSubmit} = useForm<FormValues>({})
-  const submitPlace = (data: FormValues): void => {
-    fetch("/api/places", {
+  const submitPlace = async(data: FormValues): Promise<void> => {
+    try {
+      const res = await fetch("/api/places", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ title: data.title, address: data.address, explanation: data.explanation}),
+        body: JSON.stringify({ title:data.title, address:data.address, explanation:data.explanation }),
       })
-   }
+    
+    if (res.ok) {
+        router.push("/places/index");
+      }}
+    catch (error) {
+      console.error("投稿失敗:", error);
+   }}
   return (
     <div className="flex">
       <div className="w-2/5 bg-[#020817] h-[600px] p-8">
