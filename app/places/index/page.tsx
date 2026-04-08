@@ -1,5 +1,6 @@
 import EditButton from '../../_components/EditButton'
 import prisma from "@/lib/prisma";
+import Link from "next/link";
 export default async function PlacesIndexPage() {
     const posts = await prisma.sanctuaries.findMany();
     return (
@@ -11,6 +12,9 @@ export default async function PlacesIndexPage() {
                 <h2 className="text-lg text-gray-900 font-medium title-font mb-4">{post.title}</h2>
                 <h2 className="text-lg text-gray-900 font-medium title-font mb-4">{post.address}</h2>
                 <p className="leading-relaxed text-base">{post.explanation}</p>
+                <Link href={`/places/${post.id}`}>
+                     詳細
+                </Link>
                 <EditButton />
             </div>
         </div>) })}
