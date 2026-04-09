@@ -13,10 +13,13 @@ export default async function PlacesPage({ params }: PlacesDetailPageProps) {
         where: { id: placeId }
     })
 
+if (!post) {
+    return <div className="text-center text-sm my-10">聖地がありません</div>
+  }
   return (
     <div>
       <div className="flex flex-wrap -m-4">
-        <div className="xl:w-1/4 md:w-1/2 p-4" key={post.id}>
+        <div className="xl:w-1/4 md:w-1/2 p-4" >
             <div className="bg-gray-100 p-6 rounded-lg">
                 <h2 className="text-lg text-gray-900 font-medium title-font mb-4">タイトル: {post.title}</h2>
                 <h2 className="text-lg text-gray-900 font-medium title-font mb-4">住所: {post.address}</h2>
