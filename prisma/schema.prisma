@@ -64,6 +64,9 @@ model Sanctuaries {
   title        String
   address      String
   explanation  String
+  latitude     Float?
+  longitude    Float?
+  
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 }
