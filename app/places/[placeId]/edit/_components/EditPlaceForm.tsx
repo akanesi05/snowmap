@@ -41,11 +41,9 @@ export default function EditPlaceForm(props: EditPlaceFormProps) {
         <h1 className="text-white text-2xl font-bold mb-4">聖地編集フォーム</h1>
         <p className="text-white">タイトル</p>
         <input {...register('title')} className="mr-6  sm:mr-0  text-black bg-white" defaultValue={props.post.title} />
-        
         <p className="text-white">説明</p>
         <textarea
           {...register('explanation')}
-          type="text"
           className="mr-6 sm:mr-0  text-black bg-white h-[100px]"
           defaultValue={props.post.explanation}
         />
