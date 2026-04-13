@@ -2,7 +2,16 @@
 import { useForm } from "react-hook-form"
 import UpdateButton from '../../../../_components/UpdateButton'
 import { useRouter } from "next/navigation";
-export default function EditPlaceForm(props) {
+
+type EditPlaceFormProps = {
+  post: {
+    title: string
+    explanation: string
+    address: string
+  }
+}
+
+export default function EditPlaceForm(props: EditPlaceFormProps) {
     const router = useRouter();
     type FormValues = {
     title: string
