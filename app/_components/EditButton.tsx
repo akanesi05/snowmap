@@ -1,7 +1,11 @@
 'use client'
 import { useRouter } from 'next/navigation'
 
-export default function EditButton(props) {
+type EditButtonProps = {
+  href: string
+}
+
+export default function EditButton(props : EditButtonProps) {
   const router = useRouter()
 
   return (
