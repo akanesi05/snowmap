@@ -26,7 +26,7 @@ if (!post) {
                 <p className="leading-relaxed text-base">説明: {post.explanation}</p>
                 <p className="leading-relaxed text-base">作成日: {format(new Date(post.createdAt), "yyyy/MM/dd")}</p>
 
-                <EditButton />
+                <EditButton href={`/places/${post.id}/edit`} />
             </div>
         </div>
     </div>

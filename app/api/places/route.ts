@@ -21,4 +21,26 @@ export async function POST(req: Request) {
   }
 }
 
+export async function PATCH(req: Request) {
+  try{
+    const { id, title, address, explanation } = await req.json();
 
+    await prisma.sanctuaries.update({
+            data: {
+                title,
+                explanation,
+                address
+            },
+            where: {
+                id: id
+            }
+  })
+  return Response.json({ message: "聖地が更新されました" });
+}catch (error) {
+    return Response.json(
+      { error: "更新に失敗しました" },
+      { status: 500 }
+    );
+  }
+
+}

@@ -11,7 +11,7 @@ type FormValues = {
 export default function PlacesNewPage() {
   const router = useRouter();
   const { register, handleSubmit} = useForm<FormValues>({})
-  const submitPlace = async(data: FormValues): Promise<void> => {
+  const submitNewPlace = async(data: FormValues): Promise<void> => {
     try {
       const res = await fetch("/api/places", {
         method: "POST",
@@ -28,13 +28,12 @@ export default function PlacesNewPage() {
   return (
     <div className="flex">
       <div className="w-2/5 bg-[#020817] h-[600px] p-8">
-      <form className="px-6 mt-4 mb-4 w-full" onSubmit={handleSubmit(submitPlace)}>
+      <form className="px-6 mt-4 mb-4 w-full" onSubmit={handleSubmit(submitNewPlace)}>
         <h1 className="text-white text-2xl font-bold mb-4">聖地投稿フォーム</h1>
         <p className="text-white">タイトル</p>
-        <textarea {...register('title')} className="mr-6  sm:mr-0  text-black bg-white" />
+        <input {...register('title')} className="mr-6  sm:mr-0  text-black bg-white" />
         <p className="text-white">説明</p>
-        <input
-          type="text"
+        <textarea
           {...register('explanation')}
           className="mr-6 sm:mr-0  text-black bg-white h-[100px]"
         />

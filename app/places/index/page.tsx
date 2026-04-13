@@ -15,7 +15,7 @@ export default async function PlacesIndexPage() {
                 <Link href={`/places/${post.id}`}>
                      詳細
                 </Link>
-                <EditButton />
+                <EditButton href={`/places/${post.id}/edit`} />
             </div>
         </div>) })}
     </div>
