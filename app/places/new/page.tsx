@@ -34,7 +34,6 @@ export default function PlacesNewPage() {
         <input {...register('title')} className="mr-6  sm:mr-0  text-black bg-white" />
         <p className="text-white">説明</p>
         <textarea
-          type="text"
           {...register('explanation')}
           className="mr-6 sm:mr-0  text-black bg-white h-[100px]"
         />
