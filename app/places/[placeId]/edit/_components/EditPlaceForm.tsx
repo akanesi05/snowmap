@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 
 type EditPlaceFormProps = {
   post: {
+    id: string
     title: string
     explanation: string
     address: string
