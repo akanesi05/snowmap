@@ -3,6 +3,9 @@ import {APIProvider, Map} from '@vis.gl/react-google-maps';
 
 export default function PlacesMap() {
     const mapKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY
+    if (!mapKey) {
+          return <p>APIキーがありません</p>
+        }
     return (
     <APIProvider apiKey={mapKey}>
     <Map
