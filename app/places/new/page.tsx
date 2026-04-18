@@ -44,7 +44,7 @@ export default function PlacesNewPage() {
         </p>
         </form>
       </div>
-      <div className="w-3/5 bg-pink-100 h-[600px] relative">
+      <div className="w-3/5 bg-pink-100 h-[600px] relative ">
         <Image
           className=" object-cover object-center"
           src="/map.png"
