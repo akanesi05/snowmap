@@ -2,6 +2,8 @@ import EditButton from '../../_components/EditButton'
 import prisma from "@/lib/prisma";
 import Link from "next/link";
 import Image from "next/image";
+import PlacesMapClient from '../_components/PlacesMapClient'
+
 export default async function PlacesIndexPage() {
     const posts = await prisma.sanctuaries.findMany();
     return (
@@ -19,15 +21,9 @@ export default async function PlacesIndexPage() {
                 <EditButton href={`/places/${post.id}/edit`} />
             </div>
         </div>) })}
-
     </div>
     <div className="w-3/5 bg-pink-100 h-[600px] relative m-4">
-        <Image
-          className=" object-cover object-center"
-          src="/map.png"
-          alt="地図画像"
-          fill
-        />
+       <PlacesMapClient />
       </div>
     </div>
     </div>
