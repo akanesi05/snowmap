@@ -23,7 +23,7 @@ export default async function PlacesIndexPage() {
         </div>) })}
     </div>
     <div className="w-3/5 bg-pink-100 h-[600px] relative m-4">
-       <PlacesMapClient />
+       <PlacesMapClient posts={posts} />
       </div>
     </div>
     </div>
