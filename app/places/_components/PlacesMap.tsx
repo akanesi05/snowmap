@@ -22,6 +22,10 @@ export default function PlacesMap({ posts }: PlacesMapProps) {
     if (!mapKey) {
           return <p>APIキーがありません</p>
         }
+
+    const mapPosts = posts.filter((post) => {
+       return post.latitude != null && post.longitude != null
+     });
     return (
     <APIProvider apiKey={mapKey}>
     <Map
@@ -30,8 +34,10 @@ export default function PlacesMap({ posts }: PlacesMapProps) {
         defaultZoom={10}
         gestureHandling='greedy'
         disableDefaultUI
-    />
-      <Marker position={{lat: posts[17].latitude,lng: posts[17].longitude}} />
+         >
+    {mapPosts.map((post) => { return (<Marker position={{lat: post.latitude,lng: post.longitude}} key={post.id}>
+            </Marker>) })}
+    </Map>
     </APIProvider>
     )
 }
