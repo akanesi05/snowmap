@@ -26,8 +26,8 @@ export default function PlacesMap({ posts }: PlacesMapProps) {
     <APIProvider apiKey={mapKey}>
     <Map
         style={{width: '100%', height: '100%'}}
-        defaultCenter={{lat: 22.54992, lng: 0}}
-        defaultZoom={3}
+        defaultCenter={{lat:35.7056, lng: 139.7519}}
+        defaultZoom={10}
         gestureHandling='greedy'
         disableDefaultUI
     />
