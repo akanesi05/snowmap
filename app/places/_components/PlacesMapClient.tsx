@@ -2,12 +2,12 @@
 import dynamic from "next/dynamic"
 
 type Post = {
-  id: number;
+  id: string
   title: string;
   explanation: string;
   address: string;
-  latitude: number;
-  longitude: number;
+  latitude: number | null
+  longitude: number | null
 };
 
 type PlacesMapClientProps = {

@@ -2,12 +2,12 @@
 import {APIProvider, Map, Marker} from '@vis.gl/react-google-maps'; 
 import { useState } from 'react';
 type  Post= {
-    id: number;
+    id: string
     title: string
     explanation: string
     address: string
-    latitude: number
-    longitude: number
+    latitude: number | null
+    longitude: number | null
 }
 
 type PlacesMapProps = {
