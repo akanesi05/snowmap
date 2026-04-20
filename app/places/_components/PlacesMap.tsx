@@ -6,8 +6,8 @@ type  Post= {
     title: string
     explanation: string
     address: string
-    latitude: number | null
-    longitude: number | null
+    latitude: number
+    longitude: number
 }
 
 type PlacesMapProps = {
