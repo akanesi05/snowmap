@@ -1,5 +1,6 @@
 "use client";
 import {APIProvider, Map, Marker} from '@vis.gl/react-google-maps'; 
+import { useState } from 'react';
 type  Post= {
     id: number;
     title: string
@@ -12,13 +13,9 @@ type  Post= {
 type PlacesMapProps = {
   posts: Post[];
 };
-
 export default function PlacesMap({ posts }: PlacesMapProps) {
+    const [selectedPost, setSelectedPost] = useState<Post | null>(null);
     const mapKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY
-    console.log(posts.length)
-    console.log(posts[17]['title'])
-    console.log(posts[17]['latitude'])
-    console.log(posts[17]['longitude'])
     if (!mapKey) {
           return <p>APIキーがありません</p>
         }
@@ -27,6 +24,16 @@ export default function PlacesMap({ posts }: PlacesMapProps) {
        return post.latitude != null && post.longitude != null
      });
     return (
+    <div>
+      {selectedPost&& <div className="bg-gray-100 p-6 rounded-lg">
+                <h2 className="text-lg text-gray-900 font-medium title-font mb-4">タイトル: {selectedPost.title}</h2>
+                <h2 className="text-lg text-gray-900 font-medium title-font mb-4">住所: {selectedPost.address}</h2>
+                <p className="leading-relaxed text-base">説明: {selectedPost.explanation}</p>
+              
+                {/* <EditButton href={`/places/${selectedPost.id}/edit`} /> */}
+            </div>}
+    
+    <div className="w-full h-[600px] relative m-4">
     <APIProvider apiKey={mapKey}>
     <Map
         style={{width: '100%', height: '100%'}}
@@ -35,10 +42,12 @@ export default function PlacesMap({ posts }: PlacesMapProps) {
         gestureHandling='greedy'
         disableDefaultUI
          >
-    {mapPosts.map((post) => { return (<Marker position={{lat: post.latitude,lng: post.longitude}} key={post.id}>
+    {mapPosts.map((post) => { return (<Marker position={{lat: post.latitude,lng: post.longitude}} key={post.id} onClick={() => setSelectedPost(post)}>
             </Marker>) })}
     </Map>
     </APIProvider>
+    </div>
+    </div>
     )
 }
 
