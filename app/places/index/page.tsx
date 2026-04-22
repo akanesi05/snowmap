@@ -1,7 +1,6 @@
 import EditButton from '../../_components/EditButton'
 import prisma from "@/lib/prisma";
 import Link from "next/link";
-import Image from "next/image";
 import PlacesMapClient from '../_components/PlacesMapClient'
 
 export default async function PlacesIndexPage() {
@@ -9,7 +8,7 @@ export default async function PlacesIndexPage() {
     return (
     <div>
         <h1>場所一覧</h1>
-    <div className="flex">
+    <div className="flex ">
     <div className="overflow-y-auto m-4 h-[600px]">
         {posts.map((post) => { return (<div className=" p-4" key={post.id}>
             <div className="bg-gray-100 p-6 rounded-lg">
@@ -22,7 +21,7 @@ export default async function PlacesIndexPage() {
             </div>
         </div>) })}
     </div>
-    <div className="w-3/5 bg-pink-100 h-[600px] relative m-4">
+    <div className="w-3/5 h-[600px] relative ">
        <PlacesMapClient posts={posts} />
       </div>
     </div>
