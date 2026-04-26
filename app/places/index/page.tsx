@@ -3,12 +3,24 @@ import prisma from "@/lib/prisma";
 import Link from "next/link";
 import PlacesMapClient from '../_components/PlacesMapClient'
 
+type PostWithLocation = {
+  id: string
+  title: string
+  explanation: string
+  address: string
+  latitude: number
+  longitude: number
+  createdAt: Date
+  updatedAt: Date
+}
+
 export default async function PlacesIndexPage() {
     const posts = await prisma.sanctuaries.findMany();
+    const mapPosts = posts.filter((post) : post is PostWithLocation => { return (post.latitude !==null && post.longitude!==null)});
     return (
     <div>
         <h1>場所一覧</h1>
-    <div className="flex ">
+    <div className="flex">
     <div className="overflow-y-auto m-4 h-[600px]">
         {posts.map((post) => { return (<div className=" p-4" key={post.id}>
             <div className="bg-gray-100 p-6 rounded-lg">
@@ -22,7 +34,7 @@ export default async function PlacesIndexPage() {
         </div>) })}
     </div>
     <div className="w-3/5 h-[600px] relative ">
-       <PlacesMapClient posts={posts} />
+       <PlacesMapClient posts={mapPosts} />
       </div>
     </div>
     </div>
