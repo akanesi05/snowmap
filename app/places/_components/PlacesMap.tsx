@@ -41,7 +41,11 @@ export default function PlacesMap({ posts }: PlacesMapProps) {
         defaultZoom={10}
         gestureHandling='greedy'
         disableDefaultUI
-        onClick={(event) => console.log(event.detail.latLng.lat, event.detail.latLng.lng)}
+        onClick={(event) => {
+          if (!event.detail.latLng) return
+
+          console.log(event.detail.latLng.lat, event.detail.latLng.lng)
+        }}
         >
     {mapPosts.map((post) => { return (<Marker position={{lat: post.latitude,lng: post.longitude}} key={post.id} onClick={() => setSelectedPost(post)}>
             </Marker>) })}
