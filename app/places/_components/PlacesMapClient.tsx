@@ -1,6 +1,7 @@
 "use client";
 import dynamic from "next/dynamic"
 
+
 type Post = {
   id: string
   title: string;
@@ -12,15 +13,21 @@ type Post = {
 
 type PlacesMapClientProps = {
   posts: Post[];
+  onLocationSelect?: (location: ClickedLocation) => void
 };
 
+
+type ClickedLocation = {
+  latitude: number
+  longitude: number
+}
 const PlacesMap = dynamic(
     () => import('./PlacesMap'),
     {ssr: false}
 )
-export default function PlacesMapClient({ posts }: PlacesMapClientProps) {
+export default function PlacesMapClient({ posts, onLocationSelect }: PlacesMapClientProps) {
     return ( 
-        <PlacesMap posts={posts}/>
+        <PlacesMap posts={posts} onLocationSelect={onLocationSelect}/>
     )
 }
 
