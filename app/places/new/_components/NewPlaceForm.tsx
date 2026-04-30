@@ -7,15 +7,29 @@ type FormValues = {
     explanation: string
     address: string
 }
-export default function NewPlaceForm() {
+
+type NewPlaceFormProps = {
+  selectedLocation: ClickedLocation | null
+}
+
+type ClickedLocation = {
+  latitude: number
+  longitude: number
+}
+
+export default function NewPlaceForm({ selectedLocation }: NewPlaceFormProps) {
   const router = useRouter();
   const { register, handleSubmit} = useForm<FormValues>({})
   const submitNewPlace = async(data: FormValues): Promise<void> => {
+    if (!selectedLocation) {
+       return
+       }
     try {
       const res = await fetch("/api/places", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ title:data.title, address:data.address, explanation:data.explanation }),
+        body: JSON.stringify({ title:data.title, address:data.address, explanation:data.explanation,latitude: selectedLocation.latitude
+                              ,longitude: selectedLocation.longitude }),
       })
     
     if (res.ok) {

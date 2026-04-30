@@ -12,8 +12,16 @@ type  Post= {
 
 type PlacesMapProps = {
   posts: Post[];
+  onLocationSelect?: (location: ClickedLocation) => void;
+
 };
-export default function PlacesMap({ posts }: PlacesMapProps) {
+
+type ClickedLocation = {
+  latitude: number
+  longitude: number
+}
+
+export default function PlacesMap({ posts, onLocationSelect }: PlacesMapProps) {
     const [selectedPost, setSelectedPost] = useState<Post | null>(null);
     const mapKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY
     if (!mapKey) {
@@ -43,9 +51,11 @@ export default function PlacesMap({ posts }: PlacesMapProps) {
         disableDefaultUI
         onClick={(event) => {
           if (!event.detail.latLng) return
-
-          console.log(event.detail.latLng.lat, event.detail.latLng.lng)
-        }}
+          onLocationSelect?.({
+          latitude: event.detail.latLng.lat,
+          longitude: event.detail.latLng.lng,
+        })
+      }}
         >
     {mapPosts.map((post) => { return (<Marker position={{lat: post.latitude,lng: post.longitude}} key={post.id} onClick={() => setSelectedPost(post)}>
             </Marker>) })}
