@@ -1,6 +1,7 @@
 "use client"
 import { useForm } from "react-hook-form"
 import { useRouter } from "next/navigation";
+import { useEffect } from "react"
 import PostButton from "@/app/_components/PostButton";
 type FormValues = {
     title: string
@@ -15,11 +16,18 @@ type NewPlaceFormProps = {
 type ClickedLocation = {
   latitude: number
   longitude: number
+  address: string
 }
 
 export default function NewPlaceForm({ selectedLocation }: NewPlaceFormProps) {
   const router = useRouter();
-  const { register, handleSubmit} = useForm<FormValues>({})
+  const { register, handleSubmit,setValue} = useForm<FormValues>({})
+    useEffect(() => {
+    if (selectedLocation) {
+      const address = selectedLocation.address
+      setValue("address", address)
+    }
+  }, [selectedLocation, setValue])
   const submitNewPlace = async(data: FormValues): Promise<void> => {
     if (!selectedLocation) {
        return
