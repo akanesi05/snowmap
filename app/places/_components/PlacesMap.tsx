@@ -19,6 +19,8 @@ type PlacesMapProps = {
 type ClickedLocation = {
   latitude: number
   longitude: number
+  address: string
+
 }
 
 export default function PlacesMap({ posts, onLocationSelect }: PlacesMapProps) {
@@ -38,7 +40,6 @@ export default function PlacesMap({ posts, onLocationSelect }: PlacesMapProps) {
                 <h2 className="text-lg text-gray-900 font-medium title-font mb-4">住所: {selectedPost.address}</h2>
                 <p className="leading-relaxed text-base">説明: {selectedPost.explanation}</p>
               
-                {/* <EditButton href={`/places/${selectedPost.id}/edit`} /> */}
             </div>}
     
     <div className="w-full h-[600px] relative m-4">
@@ -49,14 +50,29 @@ export default function PlacesMap({ posts, onLocationSelect }: PlacesMapProps) {
         defaultZoom={10}
         gestureHandling='greedy'
         disableDefaultUI
-        onClick={(event) => {
+        onClick={async(event) => {
           if (!event.detail.latLng) return
-          onLocationSelect?.({
-          latitude: event.detail.latLng.lat,
-          longitude: event.detail.latLng.lng,
-        })
+          const lat = event.detail.latLng.lat
+          const lng = event.detail.latLng.lng
+
+          const res = await fetch("/api/geocode/reverse", {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({ latitude: lat, longitude: lng })
+      })
+          const data = await res.json()
+          const location = {
+          latitude: lat,
+          longitude: lng,
+          address: data.address,
+          }
+
+          console.log(location)
+
+          onLocationSelect?.(location)
       }}
         >
+
     {mapPosts.map((post) => { return (<Marker position={{lat: post.latitude,lng: post.longitude}} key={post.id} onClick={() => setSelectedPost(post)}>
             </Marker>) })}
     </Map>

@@ -20,6 +20,7 @@ type PlacesMapClientProps = {
 type ClickedLocation = {
   latitude: number
   longitude: number
+  address: string
 }
 const PlacesMap = dynamic(
     () => import('./PlacesMap'),
