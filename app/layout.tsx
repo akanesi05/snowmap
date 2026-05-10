@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Footer from './_components/Footer'
+import Header from './_components/Header'
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,14 +27,9 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body>
-        <header className='bg-[#355872] text-center py-8'>
-        <p>この表示は仮headerタグに記載したテキストです。</p>
-        
-        </header>
+        <Header/>
         {children}
-        <footer className='bg-[#355872] text-center py-8'>
-          <p>この表示は仮footerタグに記載したテキストです。</p>
-        </footer>
+        <Footer/>
       </body>
     </html>
   );
