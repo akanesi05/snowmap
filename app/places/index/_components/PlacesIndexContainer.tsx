@@ -47,7 +47,16 @@ export default function PlacesIndexContainer({ posts }: PlacesIndexContainerProp
               longitude: position.coords.longitude
             });
           });
-    }  
+    } 
+    const sortedPosts = [...posts];
+    if (currentLocation) {
+    const compare =(a: PostWithLocation, b: PostWithLocation): number=>{
+    const aDistance = calculate({ post:a, currentLocation })
+    const bDistance = calculate({ post:b, currentLocation})  
+    return aDistance - bDistance
+    }
+sortedPosts.sort(compare)
+}
   return (
     <div>
         <h1>場所一覧</h1>
@@ -57,13 +66,11 @@ export default function PlacesIndexContainer({ posts }: PlacesIndexContainerProp
         </div>
         {currentLocation && (
   <div>
-    <p>現在地</p>
-    <p>緯度: {currentLocation.latitude}</p>
-    <p>経度: {currentLocation.longitude}</p>
+    <p>現在地を取得しました</p>
   </div>
 )}
     <div className="overflow-y-auto m-4 h-[600px]">
-        {posts.map((post) => { return (<div className=" p-4" key={post.id}>
+        {sortedPosts.map((post) => { return (<div className=" p-4" key={post.id}>
             <div className="bg-gray-100 p-6 rounded-lg">
                 <h2 className="text-lg text-gray-900 font-medium title-font mb-4">{post.title}</h2>
                 <h2 className="text-lg text-gray-900 font-medium title-font mb-4">{post.address}</h2>
@@ -73,9 +80,7 @@ export default function PlacesIndexContainer({ posts }: PlacesIndexContainerProp
                 <Link href={`/places/${post.id}`}>
                      詳細
                 </Link>
-                <p>緯度: {post.latitude}</p>
-                <p>経度: {post.longitude}</p>
-                
+            
                 <EditButton href={`/places/${post.id}/edit`} />
             </div>
         </div>) })}
