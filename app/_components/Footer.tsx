@@ -4,7 +4,7 @@ export default function Footer() {
     <footer className='bg-[#0284C7] py-8 px-4 text-white'>
         <div className="flex gap-20 justify-between mx-auto max-w-6xl">
             <div>
-                <Link href="/" className="font-bold text-xl">Snow Map</Link>
+                <Link href="/places/index" className="font-bold text-xl">Snow Map</Link>
                 <p className="text-sm">聖地巡礼マップ</p>
                 <p className="text-gray-200 mt-3 max-w-lg leading-relaxed">
                     Snow Manの聖地をめぐる旅。MV・ドラマ・バラエティのロケ地を巡って、

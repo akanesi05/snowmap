@@ -12,7 +12,7 @@ export default function EditButton(props : EditButtonProps) {
     <button
       type="button"
       onClick={() => router.push(props.href)}
-      className="rounded bg-blue-500 px-4 py-2 text-white"
+      className="rounded bg-gray-300 px-4 py-2 text-gray-800"
     >
       編集
     </button>
