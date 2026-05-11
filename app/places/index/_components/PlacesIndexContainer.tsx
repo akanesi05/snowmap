@@ -58,37 +58,43 @@ export default function PlacesIndexContainer({ posts }: PlacesIndexContainerProp
 sortedPosts.sort(compare)
 }
   return (
-    <div>
-        <h1>場所一覧</h1>
-    <div className="flex">
-        <div>
-          <button onClick={handleGetCurrentLocation}>Get Current Position</button>
+    <div className="bg-gray-100 p-4 flex flex-col">
+        <div className="flex items-center gap-2 font-bold text-2xl mb-4">
+           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            <h1>場所一覧</h1>
         </div>
+     <div>
+     <div className="flex-col gap-2 mb-4 items-start">
+          <button className="bg-blue-500 rounded-full text-white py-2 px-4" onClick={handleGetCurrentLocation}>現在地を取得</button>
+     </div>
         {currentLocation && (
-  <div>
     <p>現在地を取得しました</p>
-  </div>
-)}
-    <div className="overflow-y-auto m-4 h-[600px]">
+)}</div>
+    <div className="flex gap-8">
+      <div className="w-2/5 flex flex-col gap-4">
+    <div className="overflow-y-auto h-[600px]">
         {sortedPosts.map((post) => { return (<div className=" p-4" key={post.id}>
-            <div className="bg-gray-100 p-6 rounded-lg">
+            <div className="bg-white p-6 rounded-lg shadow-md">
                 <h2 className="text-lg text-gray-900 font-medium title-font mb-4">{post.title}</h2>
-                <h2 className="text-lg text-gray-900 font-medium title-font mb-4">{post.address}</h2>
+                <h2 className="text-sm text-gray-600 font-medium title-font mb-4">{post.address}</h2>
                 {currentLocation && (
-                  <p>現在地から {calculate({ post, currentLocation }).toFixed(2)} km</p>
+                  <p className="text-sm mt-2 text-gray-700">現在地から {calculate({ post, currentLocation }).toFixed(2)} km</p>
                 )}
-                <Link href={`/places/${post.id}`}>
+                <div className="flex gap-2 items-center mt-4">
+                <Link className="rounded bg-gray-800 px-4 py-2 text-white" href={`/places/${post.id}`}>
                      詳細
                 </Link>
-            
+                
                 <EditButton href={`/places/${post.id}/edit`} />
+                </div>
             </div>
         </div>) })}
     </div>
-    <div className="w-3/5 h-[600px] relative ">
+    </div>
+    <div className="w-3/5 h-[600px] relative rounded-lg overflow-hidden border">
        <PlacesMapClient posts={posts} />
       </div>
     </div>
-    </div>
+  </div>
   )
 }
