@@ -1,5 +1,5 @@
 "use client";
-import {APIProvider, Map, Marker} from '@vis.gl/react-google-maps'; 
+import {APIProvider, Map, Marker,InfoWindow} from '@vis.gl/react-google-maps'; 
 import { useState } from 'react';
 type  Post= {
     id: string
@@ -34,13 +34,7 @@ export default function PlacesMap({ posts, onLocationSelect }: PlacesMapProps) {
        return post.latitude != null && post.longitude != null
      });
     return (
-    <div>
-      {selectedPost&& <div className="bg-gray-100 p-6 rounded-lg">
-                <h2 className="text-lg text-gray-900 font-medium title-font mb-4">タイトル: {selectedPost.title}</h2>
-                <h2 className="text-lg text-gray-900 font-medium title-font mb-4">住所: {selectedPost.address}</h2>
-                <p className="leading-relaxed text-base">説明: {selectedPost.explanation}</p>
-              
-            </div>}
+  
     
     <div className="w-full h-[600px] relative m-4">
     <APIProvider apiKey={mapKey}>
@@ -75,10 +69,16 @@ export default function PlacesMap({ posts, onLocationSelect }: PlacesMapProps) {
 
     {mapPosts.map((post) => { return (<Marker position={{lat: post.latitude,lng: post.longitude}} key={post.id} onClick={() => setSelectedPost(post)}>
             </Marker>) })}
+    
+         {selectedPost&&<InfoWindow  onClose={() => setSelectedPost(null)}  position={{lat:selectedPost.latitude,lng:selectedPost.longitude}} >
+          <div className="w-[280px] p-3 gap-2 flex flex-col">
+                <h2 className="text-lg font-bold text-gray-900">{selectedPost.title}</h2>
+                <p className="text-sm text-gray-600 leading-relaxed break-words">{selectedPost.address}</p>
+                <p className="leading-relaxed text-base break-words">説明: {selectedPost.explanation}</p>
+              </div>
+            </InfoWindow>}
     </Map>
     </APIProvider>
     </div>
-    </div>
     )
 }
-
