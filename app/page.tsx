@@ -1,12 +1,14 @@
-import CreatePlaceButton from './_components/CreatePlaceButton'
 import Link from "next/link";
 import Image from "next/image";
-import { MapPin, NotebookPen, Navigation, ArrowRight } from "lucide-react";
+import { MapPin, NotebookPen, Navigation, ArrowRight, Snowflake } from "lucide-react";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-gradient-to-b from-sky-50 to-white px-6 py-16">
-      <section className='max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center'>
+    <main className="relative min-h-screen overflow-hidden bg-gradient-to-b from-sky-50 to-white px-6 py-16">
+      <Snowflake className="pointer-events-none absolute left-16 top-28 h-16 w-16 text-sky-200/50" />
+      <Snowflake className="pointer-events-none absolute right-20 top-80 h-20 w-20 text-sky-100/60" />
+      <Snowflake className="pointer-events-none absolute left-16 bottom-48 h-28 w-28 text-sky-200/35" />
+      <section className='relative z-10 max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center'>
         <div className="space-y-6">
           <h1 className='text-5xl font-bold text-slate-900'>Snow Map</h1>
           <p className="text-lg font-semibold text-sky-600">Snow Manの聖地を地図で記録して、見つけることができるアプリ</p>
@@ -14,8 +16,8 @@ export default function Home() {
           MVやドラマ、バラエティなどに登場したロケ地を投稿し、みんなで共有しよう。あなたの投稿が、誰かの巡礼の旅を手助けし、より楽しいものにするかもしれません。
           </p>
           <div className="flex gap-4">
-            <Link href="/places/index" className="inline-flex w-48 justify-center rounded bg-blue-500 text-white px-6 py-3">聖地を探す</Link>
-            <Link href="/places/new" className="inline-flex w-48 justify-center rounded border border-blue-500 bg-white px-6 py-3 text-blue-500">聖地を投稿する</Link>
+            <Link href="/places/index" className="inline-flex w-48 justify-center rounded bg-blue-500 text-white px-6 py-3 hover:bg-blue-600">聖地を探す</Link>
+            <Link href="/places/new" className="inline-flex w-48 justify-center rounded border border-blue-500 bg-white px-6 py-3 text-blue-500 hover:bg-blue-100">聖地を投稿する</Link>
           </div>
         </div>
         <div className="rounded-3xl bg-white p-6 shadow-lg">
@@ -28,7 +30,7 @@ export default function Home() {
           />
         </div> 
       </section>
-      <section className="max-w-6xl mx-auto mt-16 grid grid-cols-1 md:grid-cols-3 gap-6">
+      <section className="relative z-10 max-w-6xl mx-auto mt-16 grid grid-cols-1 md:grid-cols-3 gap-6">
         <Link href="/places/index" className="group rounded-2xl bg-white p-6 shadow">
           <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-sky-100 text-sky-600">
             <MapPin size={20} />
