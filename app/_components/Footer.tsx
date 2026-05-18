@@ -13,7 +13,7 @@ export default function Footer() {
             </div>
             <div>
                 <h3 className="font-bold">ページ</h3>
-                <div className="space-y-2">
+                <div className="flex flex-col gap-2">
                 <Link href="/places/index" className="text-gray-200 hover:underline">聖地一覧</Link>
                 <Link href="/auth/login" className="text-gray-200 hover:underline">ログイン</Link>
                 <Link href="/auth/register" className="text-gray-200 hover:underline">新規登録</Link>
@@ -22,9 +22,9 @@ export default function Footer() {
             <div>
                 <h3 className="font-bold">サポート</h3>
                 <div className="space-y-2">
-                    <p className="text-gray-200">利用規約</p>
-                    <p className="text-gray-200">プライバシーポリシー</p>
-                    <p className="text-gray-200">お問い合わせ</p>
+                    <p className="text-gray-200 hover:underline">利用規約</p>
+                    <p className="text-gray-200 hover:underline">プライバシーポリシー</p>
+                    <p className="text-gray-200 hover:underline">お問い合わせ</p>
                 </div>
             </div>
         </div>
