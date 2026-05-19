@@ -2,7 +2,7 @@ import Link from 'next/link'
 export default function Footer() {
   return (
     <footer className='bg-[#0284C7] py-8 px-4 text-white'>
-        <div className="flex gap-20 justify-between mx-auto max-w-6xl flex-col md:flex-row gap-10">
+        <div className="flex gap-20 justify-between mx-auto max-w-6xl flex-col md:flex-row">
             <div>
                 <Link href="/places/index" className="font-bold text-xl">Snow Map</Link>
                 <p className="text-sm">聖地巡礼マップ</p>

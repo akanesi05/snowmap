@@ -63,15 +63,16 @@ sortedPosts.sort(compare)
            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg>
             <h1>場所一覧</h1>
         </div>
-     <div>
+    <div className="flex gap-8 flex-col md:flex-row">
+    <div className="md:w-2/5 flex flex-col gap-4 w-full order-2 md:order-1">
+
+    <div>
      <div className="flex-col gap-2 mb-4 items-start">
           <button className="bg-blue-500 rounded-full text-white py-2 px-4" onClick={handleGetCurrentLocation}>現在地を取得</button>
      </div>
         {currentLocation && (
     <p>現在地を取得しました</p>
 )}</div>
-    <div className="flex gap-8">
-      <div className="w-2/5 flex flex-col gap-4">
     <div className="overflow-y-auto h-[600px]">
         {sortedPosts.map((post) => { return (<div className=" p-4" key={post.id}>
             <div className="bg-white p-6 rounded-lg shadow-md">
@@ -84,14 +85,13 @@ sortedPosts.sort(compare)
                 <Link className="rounded bg-gray-800 px-4 py-2 text-white" href={`/places/${post.id}`}>
                      詳細
                 </Link>
-                
                 <EditButton href={`/places/${post.id}/edit`} />
                 </div>
             </div>
         </div>) })}
     </div>
     </div>
-    <div className="w-3/5 h-[600px] relative rounded-lg overflow-hidden border">
+    <div className="md:w-3/5 md:h-[600px] relative rounded-lg overflow-hidden border w-full order-1 md:order-2 h-[300px]">
        <PlacesMapClient posts={posts} />
       </div>
     </div>
