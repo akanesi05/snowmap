@@ -70,8 +70,8 @@ sortedPosts.sort(compare)
         {currentLocation && (
     <p>現在地を取得しました</p>
 )}</div>
-    <div className="flex gap-8">
-      <div className="w-2/5 flex flex-col gap-4">
+    <div className="flex gap-8 flex-col md:flex-row">
+    <div className="md:w-2/5 flex flex-col gap-4 w-full order-2 md:order-1">
     <div className="overflow-y-auto h-[600px]">
         {sortedPosts.map((post) => { return (<div className=" p-4" key={post.id}>
             <div className="bg-white p-6 rounded-lg shadow-md">
@@ -91,7 +91,7 @@ sortedPosts.sort(compare)
         </div>) })}
     </div>
     </div>
-    <div className="w-3/5 h-[600px] relative rounded-lg overflow-hidden border">
+    <div className="md:w-3/5 md:h-[600px] relative rounded-lg overflow-hidden border w-full order-1 md:order-2 h-[300px]">
        <PlacesMapClient posts={posts} />
       </div>
     </div>
