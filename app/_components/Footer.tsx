@@ -22,7 +22,7 @@ export default function Footer() {
             <div>
                 <h3 className="font-bold">サポート</h3>
                 <div className="space-y-2">
-                    <p className="text-gray-200 hover:underline">利用規約</p>
+                    <Link href="/terms" className="text-gray-200 hover:underline">利用規約</Link>
                     <p className="text-gray-200 hover:underline">プライバシーポリシー</p>
                     <p className="text-gray-200 hover:underline">お問い合わせ</p>
                 </div>
