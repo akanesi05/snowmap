@@ -5,6 +5,10 @@ import { MapPin, NotebookPen, Navigation, ArrowRight, Snowflake } from "lucide-r
 export default function Home() {
   return (
     <main className="relative min-h-screen overflow-hidden bg-gradient-to-b from-sky-50 to-white px-6 py-16">
+      <div className="snow">●</div>
+      <div className="snow snow2">●</div>
+      <div className="snow snow3">●</div>
+      <div className="snow snow4">●</div>
       <Snowflake className="pointer-events-none absolute left-16 top-28 h-16 w-16 text-sky-200/50" />
       <Snowflake className="pointer-events-none absolute right-20 top-80 h-20 w-20 text-sky-100/60" />
       <Snowflake className="pointer-events-none absolute left-16 bottom-48 h-28 w-28 text-sky-200/35" />
