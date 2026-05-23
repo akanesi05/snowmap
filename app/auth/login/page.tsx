@@ -6,7 +6,7 @@ import { Suspense } from 'react'
 export default function LoginPage() {
   return (
     <div className="md:min-h-screen bg-gray-100 flex md:items-center px-4 py-10">
-    <div className="mx-auto max-w-md p-6 bg-white rounded-2xl shadow">
+    <div className="mx-auto max-w-lg p-6 md:p-8 bg-white rounded-2xl shadow">
       <div className="mb-6 flex items-center gap-2">
         <Image src="/logo.png" alt="ロゴ" width={32} height={32} />
         <p className="text-sm font-semibold text-sky-500">Snow Man Pilgrimage</p>
