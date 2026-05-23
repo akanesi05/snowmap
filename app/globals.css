@@ -24,3 +24,52 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.snow {
+  position: absolute;
+  top: -5%;
+  left: 0;
+  color: #cbd5e1;
+  opacity: 0.7;
+  font-size: 10px;
+  text-shadow:
+    10vw -100px 2px,
+    20vw -300px 3px,
+    35vw -500px 2px,
+    50vw -200px 4px,
+    65vw -400px 2px,
+    80vw -250px 3px,
+    95vw -600px 2px;
+  animation: snow-fall 10s linear infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.snow2 {
+  animation-duration: 14s;
+  opacity: 0.6;
+  font-size: 8px;
+}
+
+.snow3 {
+  animation-duration: 16s;
+  opacity: 0.8;
+  font-size: 6px;
+}
+
+.snow4 {
+  animation-duration: 12s;
+  opacity: 0.7;
+  font-size: 9px;
+  color: #9bbce2;
+}
+
+@keyframes snow-fall {
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(110vh);
+  }
+}
