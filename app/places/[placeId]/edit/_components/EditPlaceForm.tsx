@@ -2,6 +2,7 @@
 import { useForm } from "react-hook-form"
 import UpdateButton from '../../../../_components/UpdateButton'
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 type EditPlaceFormProps = {
   post: {
@@ -11,8 +12,6 @@ type EditPlaceFormProps = {
     address: string
   }
 }
-
-
 
 export default function EditPlaceForm(props: EditPlaceFormProps) {
     const router = useRouter();
@@ -40,20 +39,21 @@ export default function EditPlaceForm(props: EditPlaceFormProps) {
 }
     return (
         <form className="px-6 mt-4 mb-4 w-full" onSubmit={handleSubmit(submitEditPlace)}>
-        <h1 className="text-white text-2xl font-bold mb-4">聖地編集フォーム</h1>
-        <p className="text-white">タイトル</p>
-        <input {...register('title')} className="mr-6  sm:mr-0  text-black bg-white" defaultValue={props.post.title} />
-        <p className="text-white">説明</p>
-        <textarea
-          {...register('explanation')}
-          className="mr-6 sm:mr-0  text-black bg-white h-[100px]"
-          defaultValue={props.post.explanation}
-        />
-        <p className="text-white">住所</p>
-        <input {...register('address')} type="text"className="mr-6  sm:mr-0  text-black bg-white" defaultValue={props.post.address} />
-        <p>
+          <h1 className="text-2xl font-bold mb-4">聖地編集フォーム</h1>
+          <p className="text-gray-800">タイトル</p>
+          <input {...register('title')} className="text-black bg-blue-100 w-full rounded p-2 mt-1 mb-3" defaultValue={props.post.title} />
+          <p className="text-gray-800">説明</p>
+          <textarea
+            {...register('explanation')}
+            className="text-black bg-blue-100 h-[100px] w-full rounded p-2 mt-1 mb-3"
+            defaultValue={props.post.explanation}
+          />
+          <p className="text-gray-800">住所</p>
+          <input {...register('address')} type="text" className="text-black bg-blue-100 w-full rounded p-2 mt-1 mb-3" defaultValue={props.post.address} />
+          <p>
           <UpdateButton />
-        </p>
+          </p>
+          <Link href="/places/index" className="text-sm text-black pt-5 items-center inline-flex gap-1 hover:text-blue-600 underline">一覧に戻る</Link>
         </form>
     )
 }

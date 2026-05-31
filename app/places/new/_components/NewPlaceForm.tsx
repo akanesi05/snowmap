@@ -47,8 +47,8 @@ export default function NewPlaceForm({ selectedLocation }: NewPlaceFormProps) {
       console.error("投稿失敗:", error);
    }}
   return (
-    <form className="px-6 mt-4 mb-4 w-full " onSubmit={handleSubmit(submitNewPlace)}>
-      <h1 className="text-gray-800 text-2xl font-bold mb-4 ">聖地投稿フォーム</h1>
+    <form className="px-6 mt-4 mb-4 w-full" onSubmit={handleSubmit(submitNewPlace)}>
+      <h1 className="text-gray-800 text-2xl font-bold mb-4">聖地投稿フォーム</h1>
       <p className="text-gray-800">タイトル</p>
       <input {...register('title')} className="text-black bg-blue-100 w-full rounded p-2 mt-1 mb-3" />
       <p className="text-gray-800">説明</p>

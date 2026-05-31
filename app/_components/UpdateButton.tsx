@@ -7,7 +7,7 @@ export default function UpdateButton() {
       type="submit"
       className="rounded bg-blue-500 px-4 py-2 text-white"
     >
-        更新
+      変更を保存
     </button>
   )
 }
