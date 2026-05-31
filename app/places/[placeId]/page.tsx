@@ -34,6 +34,6 @@ if (!post) {
                 </div>
             </div>
         </div>
-     </div>
+    </div>
   )
 }
