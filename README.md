@@ -200,32 +200,22 @@ Snow Man の聖地に関する情報は、
 ```mermaid
 erDiagram
     users {
-        int id "PK"
+        string id PK
         string name
-        string email
-        string password_digest
-        datetime created_at
-        datetime updated_at
+        string email UK
+        string passwordHash
+        datetime createdAt
+        datetime updatedAt
     }
 
     sanctuaries {
-        int id "PK"
-        int user_id "FK"
-        string name "場所名"
+        string id PK
+        string title
         string explanation
         string address
-        datetime created_at
-        datetime updated_at
+        float latitude
+        float longitude
+        datetime createdAt
+        datetime updatedAt
     }
-
-    user_sanctuaries {
-        int id "PK"
-        int user_id "FK"
-        int sanctuary_id "FK"
-        datetime created_at
-        datetime updated_at
-    }
-
-    users ||--o{ sanctuaries : ""
-    users ||--o{ user_sanctuaries : ""
-    sanctuaries ||--o{ user_sanctuaries : ""
+```
