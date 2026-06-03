@@ -199,6 +199,34 @@ Snow Man の聖地に関する情報は、
 
 ```mermaid
 erDiagram
+    accounts {
+        string id PK
+        string userId FK
+        string type
+        string provider  
+        string providerAccountId  
+        string   refresh_token      
+        string   access_token      
+        int   expires_at  
+        string  token_type    
+        string  scope        
+        string id_token      
+        string session_state 
+              }
+    
+    sessions { 
+         string id PK 
+         string sessionToken UK 
+         string userId FK 
+         datetime expires 
+        }
+  
+    verificationTokens {
+         string identifier 
+         string token  UK
+         datetime expires
+        }
+
     users {
         string id PK
         string name
@@ -218,4 +246,7 @@ erDiagram
         datetime createdAt
         datetime updatedAt
     }
+  
+  users ||--o{ accounts : "1人のUserは、0個以上のAccountを持つ"
+  users ||--o{ sessions : "1人のUserは、0個以上のSessionを持つ"
 ```
