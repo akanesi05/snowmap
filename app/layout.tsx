@@ -3,7 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Footer from './_components/Footer'
 import Header from './_components/Header'
-
+import {auth} from "@/lib/auth";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -19,15 +19,16 @@ export const metadata: Metadata = {
   description: "SnowManの聖地巡礼マップ",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = await auth()
   return (
     <html lang="ja">
       <body>
-        <Header/>
+        <Header session={session}/>
         {children}
         <Footer/>
       </body>
