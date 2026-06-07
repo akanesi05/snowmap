@@ -1,11 +1,9 @@
-
 export default function TermsContent() {
   return (
     <main>
     <h1>SnowMap 利用規約</h1>
 <p>本規約は、SnowMap（以下「本サービス」）の利用条件を定めるものです。
 ユーザーの皆さまには、本規約に同意のうえ、本サービスをご利用いただきます。</p>
-
 
 <hr />
 

@@ -1,4 +1,3 @@
-
 export async function POST(req: Request){
   try { const { latitude, longitude } = await req.json(); 
 const apiKey = process.env.GOOGLE_MAPS_API_KEY
