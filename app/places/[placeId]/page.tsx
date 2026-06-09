@@ -31,6 +31,7 @@ if (!post) {
                 <p className="leading-relaxed text-base flex items-center gap-2"> <Calendar size={24} color="gray" strokeWidth={1} /> {format(new Date(post.createdAt), "yyyy/MM/dd")}</p>
                 <p className="leading-relaxed text-base flex gap-2 pt-4 pb-4 mb-4"> <NotebookText size={24} color="gray" strokeWidth={1} /> {post.explanation}</p>
               </div>
+               { session && <div className="pt-4"> EditButton </div> }
               <div className="pt-4">
                 <EditButton href={`/places/${post.id}/edit`} />
               </div>
