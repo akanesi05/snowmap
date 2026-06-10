@@ -3,7 +3,7 @@ import { useState } from "react"
 import EditButton from '../../../_components/EditButton'
 import Link from "next/link";
 import PlacesMapClient from '../../_components/PlacesMapClient'
-
+import type { Session } from "next-auth"
 
 type PostWithLocation = {
   id: string
@@ -18,6 +18,7 @@ type PostWithLocation = {
 
 type PlacesIndexContainerProps = {
   posts: PostWithLocation[]
+  session: Session | null
 }
 
 type CurrentLocation = { 
@@ -38,7 +39,7 @@ const calculate = ({ post,currentLocation }: { post: PostWithLocation; currentLo
       return distance
 }
 
-export default function PlacesIndexContainer({ posts }: PlacesIndexContainerProps) {
+export default function PlacesIndexContainer({ posts, session }: PlacesIndexContainerProps) {
     const [currentLocation, setCurrentLocation] = useState<CurrentLocation | null>(null);
     const handleGetCurrentLocation = () =>{
           navigator.geolocation.getCurrentPosition(position => {
@@ -85,7 +86,7 @@ sortedPosts.sort(compare)
                 <Link className="rounded bg-gray-800 px-4 py-2 text-white" href={`/places/${post.id}`}>
                      詳細
                 </Link>
-                <EditButton href={`/places/${post.id}/edit`} />
+                {session && <EditButton href={`/places/${post.id}/edit`} />}
                 </div>
             </div>
         </div>) })}
