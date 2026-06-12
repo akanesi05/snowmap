@@ -36,7 +36,7 @@ export default function PlacesMap({ posts, onLocationSelect }: PlacesMapProps) {
     return (
   
     
-    <div className="w-full h-[600px] relative m-4">
+    <div className="w-full h-full relative">
     <APIProvider apiKey={mapKey}>
     <Map
         style={{width: '100%', height: '100%'}}
