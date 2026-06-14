@@ -74,8 +74,8 @@ sortedPosts.sort(compare)
         <p>現在地を取得しました</p>
      )}</div>
     <div className="overflow-y-auto h-[600px]">
-        {sortedPosts.map((post) => { return (<div className=" p-4" key={post.id}>
-            <div className="bg-white p-6 rounded-lg shadow-md">
+        {sortedPosts.map((post) => { return (<div className="py-2" key={post.id}>
+            <div className="bg-white p-4 md:p-6  rounded-lg shadow-md">
                 <h2 className="text-lg text-gray-900 font-medium title-font mb-4">{post.title}</h2>
                 <h2 className="text-sm text-gray-600 font-medium title-font mb-4">{post.address}</h2>
                 {currentLocation && (

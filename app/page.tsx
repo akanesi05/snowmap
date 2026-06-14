@@ -19,9 +19,9 @@ export default function Home() {
           <p className="leading-8 text-slate-700">
           MVやドラマ、バラエティなどに登場したロケ地を投稿し、みんなで共有しよう。あなたの投稿が、誰かの巡礼の旅を手助けし、より楽しいものにするかもしれません。
           </p>
-          <div className="flex gap-4">
-            <Link href="/places/index" className="inline-flex w-48 justify-center rounded bg-blue-500 text-white px-6 py-3 hover:bg-blue-600">聖地を探す</Link>
-            <Link href="/places/new" className="inline-flex w-48 justify-center rounded border border-blue-500 bg-white px-6 py-3 text-blue-500 hover:bg-blue-100">聖地を投稿する</Link>
+          <div className="flex gap-4 flex-col md:flex-row">
+            <Link href="/places/index" className="inline-flex w-full justify-center rounded bg-blue-500 text-white px-6 py-3 hover:bg-blue-600">聖地を探す</Link>
+            <Link href="/places/new" className="inline-flex w-full justify-center rounded border border-blue-500 bg-white px-6 py-3 text-blue-500 hover:bg-blue-100">聖地を投稿する</Link>
           </div>
         </div>
         <div className="rounded-3xl bg-white p-6 shadow-lg">
