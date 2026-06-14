@@ -1,21 +1,21 @@
 export default function TermsContent() {
   return (
-    <main>
-    <h1>SnowMap 利用規約</h1>
+    <main className="max-w-3xl mx-auto px-4 py-8">
+    <h1 className="text-2xl font-bold mb-6">SnowMap 利用規約</h1>
 <p>本規約は、SnowMap（以下「本サービス」）の利用条件を定めるものです。
 ユーザーの皆さまには、本規約に同意のうえ、本サービスをご利用いただきます。</p>
 
-<hr />
+<hr className="my-4 border-gray-300" />
 
-<h2>第1条（サービス内容）</h2>
+<h2 className="text-lg font-semibold mt-6 mb-2">第1条（サービス内容）</h2>
 
 <p>本サービスは、Snow Man関連の聖地情報を投稿・共有できるサービスです。</p>
 
 <p>ユーザーは、本サービス上に聖地情報、住所、説明文、その他の情報を投稿できます。</p>
 
-<hr />
+<hr className="my-4 border-gray-300" />
 
-<h2>第2条（アカウント管理）</h2>
+<h2 className="text-lg font-semibold mt-6 mb-2">第2条（アカウント管理）</h2>
 
 <p>ユーザーは、自己の責任においてアカウント情報を管理するものとします。</p>
 
@@ -23,17 +23,17 @@ export default function TermsContent() {
 
 <p>運営は、なりすまし、不正利用、その他問題があると判断した場合、アカウントの利用制限等を行うことがあります。</p>
 
-<hr />
+<hr className="my-4 border-gray-300" />
 
-<h2>第3条（投稿内容について）</h2>
+<h2 className="text-lg font-semibold mt-6 mb-2">第3条（投稿内容について）</h2>
 
 <p>ユーザーが投稿した聖地情報、住所、説明文その他の情報は、本サービス上で他ユーザーに公開されます。</p>
 
 <p>ユーザーは、自らの責任において投稿を行うものとし、投稿内容について一切の責任を負うものとします。</p>
 
-<hr />
+<hr className="my-4 border-gray-300" />
 
-<h2>第4条（禁止事項）</h2>
+<h2 className="text-lg font-semibold mt-6 mb-2">第4条（禁止事項）</h2>
 
 <p>ユーザーは、以下の行為を行ってはなりません。</p>
 
@@ -49,21 +49,21 @@ export default function TermsContent() {
   <li>その他、運営が不適切と判断する行為</li>
 </ul>
 
-<hr />
+<hr className="my-4 border-gray-300" />
 
-<h2>第5条（投稿の削除）</h2>
+<h2 className="text-lg font-semibold mt-6 mb-2">第5条（投稿の削除）</h2>
 
 <p>運営は、前条に違反すると判断した投稿について、事前通知なく削除できるものとします。</p>
 
-<hr />
+<hr className="my-4 border-gray-300" />
 
-<h2>第6条（サービスの変更・停止）</h2>
+<h2 className="text-lg font-semibold mt-6 mb-2">第6条（サービスの変更・停止）</h2>
 
 <p>運営は、ユーザーへの事前通知なく、本サービスの内容変更、停止、終了を行うことができるものとします。</p>
 
-<hr />
+<hr className="my-4 border-gray-300" />
 
-<h2>第7条（免責事項）</h2>
+<h2 className="text-lg font-semibold mt-6 mb-2">第7条（免責事項）</h2>
 
 <p>運営は、本サービスに掲載される情報の正確性、完全性、有用性を保証しません。</p>
 
@@ -71,17 +71,17 @@ export default function TermsContent() {
 
 <p>ユーザー間または第三者との間で発生したトラブルについて、運営は責任を負いません。</p>
 
-<hr />
+<hr className="my-4 border-gray-300" />
 
-<h2>第8条（規約変更）</h2>
+<h2 className="text-lg font-semibold mt-6 mb-2">第8条（規約変更）</h2>
 
 <p>運営は、必要に応じて本規約を変更できるものとします。</p>
 
 <p>変更後の規約は、本サービス上に掲載した時点で効力を生じるものとします。</p>
 
-<hr />
+<hr className="my-4 border-gray-300" />
 
-<h2>第9条（お問い合わせ）</h2>
+<h2 className="text-lg font-semibold mt-6 mb-2">第9条（お問い合わせ）</h2>
 
 <p>本サービスに関するお問い合わせは、運営が指定する方法により行うものとします。</p>
 </main>
