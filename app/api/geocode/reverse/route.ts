@@ -9,8 +9,12 @@ const apiKey = process.env.GOOGLE_MAPS_API_KEY
 const res = await fetch(`https://geocode.googleapis.com/v4/geocode/location/${latitude},${longitude}/?key=${apiKey}`)
 const geocodeData = await res.json();
 const address = geocodeData.results[0].formattedAddress
-return Response.json({ address })
-}
+let formattedAddress = address 
+    if (address.startsWith("日本、")) { formattedAddress = address.slice(3) } 
+       const spaceIndex = formattedAddress.indexOf(" ") 
+       formattedAddress = formattedAddress.slice(spaceIndex + 1)
+    return Response.json({ address: formattedAddress})
+  }
 catch (error) {
     return Response.json(
       { error: "住所を取得できませんでした" },
