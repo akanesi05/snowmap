@@ -1,34 +1,29 @@
 "use client";
-import dynamic from "next/dynamic"
-
+import dynamic from "next/dynamic";
 
 type Post = {
-  id: string
+  id: string;
   title: string;
   explanation: string;
   address: string;
-  latitude: number 
-  longitude: number
+  latitude: number;
+  longitude: number;
 };
 
 type PlacesMapClientProps = {
   posts: Post[];
-  onLocationSelect?: (location: ClickedLocation) => void
+  onLocationSelect?: (location: ClickedLocation) => void;
 };
 
-
 type ClickedLocation = {
-  latitude: number
-  longitude: number
-  address: string
+  latitude: number;
+  longitude: number;
+  address: string;
+};
+const PlacesMap = dynamic(() => import("./PlacesMap"), { ssr: false });
+export default function PlacesMapClient({
+  posts,
+  onLocationSelect,
+}: PlacesMapClientProps) {
+  return <PlacesMap posts={posts} onLocationSelect={onLocationSelect} />;
 }
-const PlacesMap = dynamic(
-    () => import('./PlacesMap'),
-    {ssr: false}
-)
-export default function PlacesMapClient({ posts, onLocationSelect }: PlacesMapClientProps) {
-    return ( 
-        <PlacesMap posts={posts} onLocationSelect={onLocationSelect}/>
-    )
-}
-

@@ -1,67 +1,84 @@
-"use client"
-import { useForm } from "react-hook-form"
+"use client";
+import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react"
+import { useEffect } from "react";
 import PostButton from "@/app/_components/PostButton";
 type FormValues = {
-    title: string
-    explanation: string
-    address: string
-}
+  title: string;
+  explanation: string;
+  address: string;
+};
 
 type NewPlaceFormProps = {
-  selectedLocation: ClickedLocation | null
-}
+  selectedLocation: ClickedLocation | null;
+};
 
 type ClickedLocation = {
-  latitude: number
-  longitude: number
-  address: string
-}
+  latitude: number;
+  longitude: number;
+  address: string;
+};
 
 export default function NewPlaceForm({ selectedLocation }: NewPlaceFormProps) {
   const router = useRouter();
-  const { register, handleSubmit,setValue} = useForm<FormValues>({})
-    useEffect(() => {
+  const { register, handleSubmit, setValue } = useForm<FormValues>({});
+  useEffect(() => {
     if (selectedLocation) {
-      const address = selectedLocation.address
-      setValue("address", address)
+      const address = selectedLocation.address;
+      setValue("address", address);
     }
-  }, [selectedLocation, setValue])
-  const submitNewPlace = async(data: FormValues): Promise<void> => {
+  }, [selectedLocation, setValue]);
+  const submitNewPlace = async (data: FormValues): Promise<void> => {
     if (!selectedLocation) {
-       return
-       }
+      return;
+    }
     try {
       const res = await fetch("/api/places", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ title:data.title, address:data.address, explanation:data.explanation,latitude: selectedLocation.latitude
-                              ,longitude: selectedLocation.longitude }),
-      })
-    
-    if (res.ok) {
+        body: JSON.stringify({
+          title: data.title,
+          address: data.address,
+          explanation: data.explanation,
+          latitude: selectedLocation.latitude,
+          longitude: selectedLocation.longitude,
+        }),
+      });
+
+      if (res.ok) {
         router.push("/places/index");
-      }}
-    catch (error) {
+      }
+    } catch (error) {
       console.error("投稿失敗:", error);
-   }}
+    }
+  };
   return (
-    <form className="px-6 mt-4 mb-4 w-full" onSubmit={handleSubmit(submitNewPlace)}>
-      <h1 className="text-gray-800 text-2xl font-bold mb-4">聖地投稿フォーム</h1>
+    <form
+      className="px-6 mt-4 mb-4 w-full"
+      onSubmit={handleSubmit(submitNewPlace)}
+    >
+      <h1 className="text-gray-800 text-2xl font-bold mb-4">
+        聖地投稿フォーム
+      </h1>
       <p className="text-gray-800">タイトル</p>
-      <input {...register('title')} className="text-black bg-blue-100 w-full rounded p-2 mt-1 mb-3" />
+      <input
+        {...register("title")}
+        className="text-black bg-blue-100 w-full rounded p-2 mt-1 mb-3"
+      />
       <p className="text-gray-800">説明</p>
       <textarea
-        {...register('explanation')}
+        {...register("explanation")}
         className="text-black bg-blue-100 h-[100px] w-full rounded p-2 mt-1 mb-3"
       />
       <p className="text-gray-800">住所</p>
-      <input type="text" {...register('address')} className="text-black bg-blue-100 w-full rounded p-2 mt-1 mb-3"/>
+      <input
+        type="text"
+        {...register("address")}
+        className="text-black bg-blue-100 w-full rounded p-2 mt-1 mb-3"
+      />
       <p>
-        <PostButton/>
+        <PostButton />
       </p>
     </form>
   );
 }
-
