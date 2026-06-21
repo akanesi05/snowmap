@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import type { Session } from "next-auth";
 import { useState } from "react";
+import { signOut } from "next-auth/react";
 
 type HeaderProps = {
   session: Session | null;
@@ -26,7 +27,7 @@ export default function Header({ session }: HeaderProps) {
           <Link href="/places/index">聖地一覧</Link>
           <Link href="/places/new">聖地投稿</Link>
           {session ? (
-            <Link href="/auth/logout">ログアウト</Link>
+            <button onClick={() => signOut()}>ログアウト</button>
           ) : (
             <>
               <Link href="/auth/login">ログイン</Link>
@@ -54,9 +55,7 @@ export default function Header({ session }: HeaderProps) {
         {session ? (
           <ul>
             <li className="mt-2 text-xl ">
-              <Link href="/auth/logout" onClick={closeFunction}>
-                ログアウト
-              </Link>
+              <button onClick={() => signOut()}>ログアウト</button>
             </li>
           </ul>
         ) : (
