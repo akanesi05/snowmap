@@ -61,7 +61,6 @@ export default function PlacesMap({ posts, onLocationSelect }: PlacesMapProps) {
           address: data.address,
           }
 
-          console.log(location)
 
           onLocationSelect?.(location)
       }}
