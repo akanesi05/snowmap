@@ -1,12 +1,12 @@
-'use client'
-import { useRouter } from 'next/navigation'
+"use client";
+import { useRouter } from "next/navigation";
 
 type EditButtonProps = {
-  href: string
-}
+  href: string;
+};
 
-export default function EditButton(props : EditButtonProps) {
-  const router = useRouter()
+export default function EditButton(props: EditButtonProps) {
+  const router = useRouter();
 
   return (
     <button
@@ -16,5 +16,5 @@ export default function EditButton(props : EditButtonProps) {
     >
       編集
     </button>
-  )
+  );
 }

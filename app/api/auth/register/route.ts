@@ -11,7 +11,7 @@ export async function POST(req: Request) {
     if (existingUser) {
       return Response.json(
         { message: "このメールアドレスは既に使用されています" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -27,11 +27,6 @@ export async function POST(req: Request) {
 
     return Response.json({ message: "ユーザーが登録されました" });
   } catch (error) {
-    return Response.json(
-      { error: "登録に失敗しました" },
-      { status: 500 }
-    );
+    return Response.json({ error: "登録に失敗しました" }, { status: 500 });
   }
 }
-
-

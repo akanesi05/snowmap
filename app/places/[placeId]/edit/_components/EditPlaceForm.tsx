@@ -1,60 +1,79 @@
-'use client'
-import { useForm } from "react-hook-form"
-import UpdateButton from '../../../../_components/UpdateButton'
+"use client";
+import { useForm } from "react-hook-form";
+import UpdateButton from "../../../../_components/UpdateButton";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 type EditPlaceFormProps = {
   post: {
-    id: string
-    title: string
-    explanation: string
-    address: string
-  }
-}
+    id: string;
+    title: string;
+    explanation: string;
+    address: string;
+  };
+};
 
 export default function EditPlaceForm(props: EditPlaceFormProps) {
-    const router = useRouter();
-    type FormValues = {
-    title: string
-    explanation: string
-    address: string
-}
-    const { register, handleSubmit} = useForm<FormValues>({})
-    const submitEditPlace = async(data: FormValues): Promise<void> => {
-        try {
+  const router = useRouter();
+  type FormValues = {
+    title: string;
+    explanation: string;
+    address: string;
+  };
+  const { register, handleSubmit } = useForm<FormValues>({});
+  const submitEditPlace = async (data: FormValues): Promise<void> => {
+    try {
       const res = await fetch("/api/places", {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id:props.post.id,title:data.title, address:data.address, explanation:data.explanation }),
-      })
+        body: JSON.stringify({
+          id: props.post.id,
+          title: data.title,
+          address: data.address,
+          explanation: data.explanation,
+        }),
+      });
       if (res.ok) {
         router.push(`/places/${props.post.id}`);
       }
-        }
-
-    catch (error) {
+    } catch (error) {
       console.error("更新失敗:", error);
     }
+  };
+  return (
+    <form
+      className="px-6 mt-4 mb-4 w-full"
+      onSubmit={handleSubmit(submitEditPlace)}
+    >
+      <h1 className="text-2xl font-bold mb-4">聖地編集フォーム</h1>
+      <p className="text-gray-800">タイトル</p>
+      <input
+        {...register("title")}
+        className="text-black bg-blue-100 w-full rounded p-2 mt-1 mb-3"
+        defaultValue={props.post.title}
+      />
+      <p className="text-gray-800">説明</p>
+      <textarea
+        {...register("explanation")}
+        className="text-black bg-blue-100 h-[100px] w-full rounded p-2 mt-1 mb-3"
+        defaultValue={props.post.explanation}
+      />
+      <p className="text-gray-800">住所</p>
+      <input
+        {...register("address")}
+        type="text"
+        className="text-black bg-blue-100 w-full rounded p-2 mt-1 mb-3"
+        defaultValue={props.post.address}
+      />
+      <p>
+        <UpdateButton />
+      </p>
+      <Link
+        href="/places/index"
+        className="text-sm text-black pt-5 items-center inline-flex gap-1 hover:text-blue-600 underline"
+      >
+        一覧に戻る
+      </Link>
+    </form>
+  );
 }
-    return (
-        <form className="px-6 mt-4 mb-4 w-full" onSubmit={handleSubmit(submitEditPlace)}>
-          <h1 className="text-2xl font-bold mb-4">聖地編集フォーム</h1>
-          <p className="text-gray-800">タイトル</p>
-          <input {...register('title')} className="text-black bg-blue-100 w-full rounded p-2 mt-1 mb-3" defaultValue={props.post.title} />
-          <p className="text-gray-800">説明</p>
-          <textarea
-            {...register('explanation')}
-            className="text-black bg-blue-100 h-[100px] w-full rounded p-2 mt-1 mb-3"
-            defaultValue={props.post.explanation}
-          />
-          <p className="text-gray-800">住所</p>
-          <input {...register('address')} type="text" className="text-black bg-blue-100 w-full rounded p-2 mt-1 mb-3" defaultValue={props.post.address} />
-          <p>
-          <UpdateButton />
-          </p>
-          <Link href="/places/index" className="text-sm text-black pt-5 items-center inline-flex gap-1 hover:text-blue-600 underline">一覧に戻る</Link>
-        </form>
-    )
-}
-

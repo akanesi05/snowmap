@@ -4,6 +4,7 @@ import { format } from "date-fns";
 import Link from "next/link";
 import { ArrowLeft, MapPin, Calendar, NotebookText } from "lucide-react";
 import { auth } from "@/lib/auth";
+import DeleteButton from "../../_components/DeleteButton";
 
 interface PlacesDetailPageProps {
   params: {
@@ -58,6 +59,7 @@ export default async function PlacesPage({ params }: PlacesDetailPageProps) {
           {session && (
             <div className="pt-4">
               <EditButton href={`/places/${post.id}/edit`} />
+              <DeleteButton id={post.id} />
             </div>
           )}
         </div>
