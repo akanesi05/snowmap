@@ -12,8 +12,6 @@ export async function POST(req: Request) {
     const encodedAddress = encodeURIComponent(address);
     const res = await fetch(`https://geocode.googleapis.com/v4/geocode/address/${encodedAddress}?key=${apiKey}`)
     const geocodeData = await res.json();
-    console.log("PATCH status:", res.status);
-    console.log("PATCH geocodeData:", geocodeData);
         if (!geocodeData.results?.[0]) {
           return Response.json({ error: "住所から位置情報を取得できませんでした。住所を見直してください。" }, { status: 400 })
         }

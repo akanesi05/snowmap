@@ -27,7 +27,6 @@ export default function NewPlaceContainer({ posts }: NewPlaceContainerProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleLocationSelect = (location: ClickedLocation) => {
   setSelectedLocation(location)
-  console.log(location)
   openModal();
 }
   const openModal = () => {
