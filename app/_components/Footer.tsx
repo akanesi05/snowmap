@@ -42,7 +42,13 @@ export default function Footer() {
             <p className="text-gray-200 hover:underline">
               プライバシーポリシー
             </p>
-            <p className="text-gray-200 hover:underline">お問い合わせ</p>
+            <a
+              href="https://docs.google.com/forms/d/e/1FAIpQLSfhbbVHSebxNxt1uq_hDArf6wAcC-7dvaB_wUdftozGFwyZGg/viewform?usp=publish-editor"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              お問い合わせ
+            </a>
           </div>
         </div>
       </div>
