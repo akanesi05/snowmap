@@ -39,9 +39,9 @@ export default function Footer() {
             <Link href="/terms" className="text-gray-200 hover:underline">
               利用規約
             </Link>
-            <p className="text-gray-200 hover:underline">
+            <Link href="/privacy" className="text-gray-200 hover:underline">
               プライバシーポリシー
-            </p>
+            </Link>
             <a
               href="https://docs.google.com/forms/d/e/1FAIpQLSfhbbVHSebxNxt1uq_hDArf6wAcC-7dvaB_wUdftozGFwyZGg/viewform?usp=publish-editor"
               target="_blank"
