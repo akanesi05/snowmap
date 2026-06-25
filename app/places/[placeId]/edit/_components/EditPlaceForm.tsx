@@ -20,7 +20,11 @@ export default function EditPlaceForm(props: EditPlaceFormProps) {
     explanation: string;
     address: string;
   };
-  const { register, handleSubmit } = useForm<FormValues>({});
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormValues>({});
   const submitEditPlace = async (data: FormValues): Promise<void> => {
     try {
       const res = await fetch("/api/places", {
@@ -48,23 +52,48 @@ export default function EditPlaceForm(props: EditPlaceFormProps) {
       <h1 className="text-2xl font-bold mb-4">聖地編集フォーム</h1>
       <p className="text-gray-800">タイトル</p>
       <input
-        {...register("title")}
+        {...register("title", {
+          required: "タイトルを入力してください",
+          maxLength: {
+            value: 50,
+            message: "タイトルは50文字以内で入力してください",
+          },
+        })}
         className="text-black bg-blue-100 w-full rounded p-2 mt-1 mb-3"
         defaultValue={props.post.title}
       />
+      {errors.title && (
+        <p className="text-red-500 text-sm mb-3">{errors.title.message}</p>
+      )}
       <p className="text-gray-800">説明</p>
       <textarea
-        {...register("explanation")}
+        {...register("explanation", {
+          required: "説明を入力してください",
+          maxLength: {
+            value: 500,
+            message: "説明は500文字以内で入力してください",
+          },
+        })}
         className="text-black bg-blue-100 h-[100px] w-full rounded p-2 mt-1 mb-3"
         defaultValue={props.post.explanation}
       />
+      {errors.explanation && (
+        <p className="text-red-500 text-sm mb-3">
+          {errors.explanation.message}
+        </p>
+      )}
       <p className="text-gray-800">住所</p>
       <input
-        {...register("address")}
+        {...register("address", {
+          required: "住所を入力してください",
+        })}
         type="text"
         className="text-black bg-blue-100 w-full rounded p-2 mt-1 mb-3"
         defaultValue={props.post.address}
       />
+      {errors.address && (
+        <p className="text-red-500 text-sm mb-3">{errors.address.message}</p>
+      )}
       <p>
         <UpdateButton />
       </p>
