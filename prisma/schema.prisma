@@ -49,6 +49,7 @@ model User {
   updatedAt     DateTime @updatedAt
   accounts      Account[]
   sessions      Session[]
+  sanctuaries   Sanctuaries[]
 }
 
 model VerificationToken {
@@ -61,6 +62,8 @@ model VerificationToken {
 
 model Sanctuaries {
   id           String   @id @default(cuid())
+  userId       String?
+  user         User? @relation(fields: [userId], references: [id])
   title        String
   address      String
   explanation  String

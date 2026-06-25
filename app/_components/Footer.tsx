@@ -35,7 +35,7 @@ export default function Footer() {
         </div>
         <div>
           <h3 className="font-bold">サポート</h3>
-          <div className="space-y-2">
+          <div className="flex flex-col gap-2">
             <Link href="/terms" className="text-gray-200 hover:underline">
               利用規約
             </Link>

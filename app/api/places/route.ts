@@ -1,5 +1,14 @@
 import prisma from "@/lib/prisma";
+import { auth } from "@/lib/auth";
+
 export async function POST(req: Request) {
+  const session = await auth();
+  if (!session || !session.user || !session.user.id) {
+  return Response.json(
+    { error: "ログインが必要です。" },
+    { status: 401 }
+  );
+}
   try {
     const { title, address, explanation, latitude, longitude } =
       await req.json();
@@ -36,6 +45,7 @@ export async function POST(req: Request) {
         explanation,
         latitude: saveLatitude,
         longitude: saveLongitude,
+        userId: session.user.id,
       },
     });
     return Response.json({ message: "聖地が登録されました" });

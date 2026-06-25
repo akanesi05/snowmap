@@ -6,6 +6,7 @@ type PostWithLocation = {
   title: string;
   explanation: string;
   address: string;
+  userId: string | null;
   latitude: number;
   longitude: number;
   createdAt: Date;
