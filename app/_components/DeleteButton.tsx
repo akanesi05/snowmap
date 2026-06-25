@@ -26,7 +26,7 @@ export default function DeleteButton(props: DeleteButtonProps) {
     <button
       type="button"
       onClick={() => submitDeletePlace()}
-      className="rounded bg-gray-300 px-4 py-2 text-gray-800"
+      className="rounded bg-red-500 px-4 py-2 text-white"
     >
       削除
     </button>

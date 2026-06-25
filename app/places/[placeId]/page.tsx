@@ -15,8 +15,10 @@ export default async function PlacesPage({ params }: PlacesDetailPageProps) {
   const { placeId } = await params;
   const post = await prisma.sanctuaries.findUnique({
     where: { id: placeId },
+    include: {
+      user: true,
+    },
   });
-
   if (!post) {
     return <div className="text-center text-sm my-10">聖地がありません</div>;
   }
@@ -55,9 +57,10 @@ export default async function PlacesPage({ params }: PlacesDetailPageProps) {
                 <p className="leading-relaxed text-base">{post.explanation}</p>
               </div>
             )}
+              <p>作成者: {post.user?.name}</p>
           </div>
           {session && (
-            <div className="pt-4">
+            <div className="pt-4 gap-3 flex">
               <EditButton href={`/places/${post.id}/edit`} />
               <DeleteButton id={post.id} />
             </div>
