@@ -57,12 +57,18 @@ export default async function PlacesPage({ params }: PlacesDetailPageProps) {
                 <p className="leading-relaxed text-base">{post.explanation}</p>
               </div>
             )}
-              <p>作成者: {post.user?.name}</p>
+            <p>作成者: {post.user?.name}</p>
           </div>
           {session && (
             <div className="pt-4 gap-3 flex">
               <EditButton href={`/places/${post.id}/edit`} />
-              <DeleteButton id={post.id} />
+              {session.user &&
+                session.user.id &&
+                session.user.id === post.userId && (
+                  <>
+                    <DeleteButton id={post.id} />
+                  </>
+                )}
             </div>
           )}
         </div>

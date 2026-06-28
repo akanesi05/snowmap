@@ -4,11 +4,8 @@ import { auth } from "@/lib/auth";
 export async function POST(req: Request) {
   const session = await auth();
   if (!session || !session.user || !session.user.id) {
-  return Response.json(
-    { error: "ログインが必要です。" },
-    { status: 401 }
-  );
-}
+    return Response.json({ error: "ログインが必要です。" }, { status: 401 });
+  }
   try {
     const { title, address, explanation, latitude, longitude } =
       await req.json();
@@ -49,7 +46,7 @@ export async function POST(req: Request) {
       },
     });
     return Response.json({ message: "聖地が登録されました" });
-  } catch (error) {
+  } catch {
     return Response.json(
       {
         error:
@@ -63,6 +60,10 @@ export async function POST(req: Request) {
 export async function PATCH(req: Request) {
   try {
     const { id, title, address, explanation } = await req.json();
+    const session = await auth();
+    if (!session || !session.user || !session.user.id) {
+      return Response.json({ error: "ログインが必要です。" }, { status: 401 });
+    }
     const apiKey = process.env.GOOGLE_MAPS_API_KEY;
     const encodedAddress = encodeURIComponent(address);
     const res = await fetch(
@@ -93,21 +94,36 @@ export async function PATCH(req: Request) {
       },
     });
     return Response.json({ message: "聖地が更新されました" });
-  } catch (error) {
+  } catch {
     return Response.json({ error: "更新に失敗しました" }, { status: 500 });
   }
 }
 export async function DELETE(req: Request) {
   try {
     const { id } = await req.json(); //req.json() から id を受け取っている
+    const session = await auth();
+    if (!session || !session.user || !session.user.id) {
+      return Response.json({ error: "ログインが必要です。" }, { status: 401 });
+    }
+    const post = await prisma.sanctuaries.findUnique({
+      where: { id: id },
+    });
+    if (!post) {
+      return Response.json({ error: "投稿がありません" }, { status: 404 });
+    }
+    if (session.user.id !== post.userId) {
+      return Response.json(
+        { error: "ユーザーが一致しません" },
+        { status: 403 },
+      );
+    }
     await prisma.sanctuaries.delete({
       where: {
-        //where の id で対象の投稿を特定している
         id: id,
       },
     });
     return Response.json({ message: "聖地が削除されました" });
-  } catch (error) {
+  } catch {
     return Response.json({ error: "削除に失敗しました" }, { status: 500 });
   }
 }
