@@ -26,8 +26,11 @@ export default function Header({ session }: HeaderProps) {
         <div className="hidden md:flex gap-6 text-sm">
           <Link href="/places/index">聖地一覧</Link>
           <Link href="/places/new">聖地投稿</Link>
-          {session ? (
-            <button onClick={() => signOut()}>ログアウト</button>
+          {session && session.user ? (
+            <>
+              <p>{session.user.name}</p>
+              <button className="cursor-pointer" onClick={() => signOut()}>ログアウト</button>
+            </>
           ) : (
             <>
               <Link href="/auth/login">ログイン</Link>
@@ -52,16 +55,17 @@ export default function Header({ session }: HeaderProps) {
             </Link>
           </li>
         </ul>
-        {session ? (
+        {session && session.user ? (
           <ul>
-            <li className="mt-2 text-xl ">
-              <button onClick={() => signOut()}>ログアウト</button>
+            <li className="text-xl ">
+              <p className="mt-2">{session.user.name}</p>
+              <button className="mt-2 cursor-pointer" onClick={() => signOut()}>ログアウト</button>
             </li>
           </ul>
         ) : (
           <>
             <ul>
-              <li className="mt-2 text-xl ">
+              <li className="mt-2 text-xl">
                 <Link href="/auth/login" onClick={closeFunction}>
                   ログイン
                 </Link>
