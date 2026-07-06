@@ -46,6 +46,7 @@ export default function Footer() {
               href="https://docs.google.com/forms/d/e/1FAIpQLSfhbbVHSebxNxt1uq_hDArf6wAcC-7dvaB_wUdftozGFwyZGg/viewform?usp=publish-editor"
               target="_blank"
               rel="noopener noreferrer"
+              className="text-gray-200 hover:underline"
             >
               お問い合わせ
             </a>
