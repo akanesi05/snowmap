@@ -97,7 +97,7 @@ export default function PlacesIndexContainer({
           <div>
             <div className="flex-col gap-2 mb-4 items-start">
               <button
-                className="bg-blue-500 rounded-full text-white py-2 px-4"
+                className="bg-blue-500 rounded-full text-white py-2 px-4 cursor-pointer"
                 onClick={handleGetCurrentLocation}
               >
                 現在地を取得

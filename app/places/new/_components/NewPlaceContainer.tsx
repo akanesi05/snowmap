@@ -62,7 +62,9 @@ export default function NewPlaceContainer({ posts }: NewPlaceContainerProps) {
             <div className="absolute inset-0 bg-black/40 flex items-center justify-center z-10">
               <div className="bg-white text-black rounded-2xl p-6 shadow-xl w-[90%] max-w-[400px] max-h-[90%] overflow-y-auto">
                 <NewPlaceForm selectedLocation={selectedLocation} />
-                <button onClick={closeModal}>閉じる</button>
+                <button onClick={closeModal} className="cursor-pointer">
+                  閉じる
+                </button>
               </div>
             </div>
           )}
