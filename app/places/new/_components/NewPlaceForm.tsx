@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import PostButton from "@/app/_components/PostButton";
+import { format } from "date-fns";
 
 type FormValues = {
   title: string;
@@ -107,6 +108,10 @@ export default function NewPlaceForm({ selectedLocation }: NewPlaceFormProps) {
       {errors.address && (
         <p className="text-red-500 text-sm mb-3">{errors.address.message}</p>
       )}
+      <p>投稿日: {format(new Date(), "yyyy/MM/dd")}</p>
+      <p className="text-gray-600 text-xs pb-3">
+        投稿日は投稿時に自動で記録されます
+      </p>
       <p>
         <PostButton />
       </p>
