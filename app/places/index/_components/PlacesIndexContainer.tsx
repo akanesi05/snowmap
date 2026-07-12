@@ -109,7 +109,7 @@ export default function PlacesIndexContainer({
             {sortedPosts.map((post) => {
               return (
                 <div className="py-2" key={post.id}>
-                  <div className="bg-white p-4 md:p-6  rounded-lg shadow-md">
+                  <div className="bg-white p-4 md:p-6 rounded-lg shadow-md">
                     <h2 className="text-lg text-gray-900 font-medium title-font mb-4">
                       {post.title}
                     </h2>

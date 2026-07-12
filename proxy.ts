@@ -16,5 +16,6 @@ export const config = {
   matcher: [
     '/places/new',         
     '/places/:placeId/edit', 
+    '/profile',
   ],
 }

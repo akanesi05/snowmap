@@ -28,7 +28,12 @@ export default function Header({ session }: HeaderProps) {
           <Link href="/places/new">聖地投稿</Link>
           {session && session.user ? (
             <>
-              <p>{session.user.name}</p>
+             
+              <Link
+              href="/profile"
+            >
+              <p className="hover:text-blue-300">{session.user.name}</p>
+            </Link>
               <button className="cursor-pointer" onClick={() => signOut()}>ログアウト</button>
             </>
           ) : (
@@ -58,7 +63,12 @@ export default function Header({ session }: HeaderProps) {
         {session && session.user ? (
           <ul>
             <li className="text-xl ">
-              <p className="mt-2">{session.user.name}</p>
+               <Link
+              href="/profile"
+            >
+             <p className="hover:text-blue-300">{session.user.name}</p>
+            </Link>
+      
               <button className="mt-2 cursor-pointer" onClick={() => signOut()}>ログアウト</button>
             </li>
           </ul>
