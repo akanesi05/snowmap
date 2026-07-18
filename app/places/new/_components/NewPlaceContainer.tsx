@@ -53,7 +53,7 @@ export default function NewPlaceContainer({ posts }: NewPlaceContainerProps) {
             MV、ドラマ、映画、番組のタイトル、説明を入力して、住所を確認して投稿ボタンを押してください。。
           </p>
         </div>
-        <div className="md:w-3/5 md:h-[600px] relative overflow-hidden order-1 md:order-2 w-full h-[360px]">
+        <div className="md:w-3/5 md:h-[600px] relative rounded-lg overflow-hidden border w-full order-1 md:order-2 h-[300px] my-4">
           <PlacesMapClient
             posts={posts}
             onLocationSelect={handleLocationSelect}
