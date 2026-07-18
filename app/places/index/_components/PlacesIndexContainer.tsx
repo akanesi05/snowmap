@@ -56,6 +56,8 @@ export default function PlacesIndexContainer({
 }: PlacesIndexContainerProps) {
   const [currentLocation, setCurrentLocation] =
     useState<CurrentLocation | null>(null);
+
+  const [sortOrder, setSortOrder] = useState("新しい順");
   const handleGetCurrentLocation = () => {
     navigator.geolocation.getCurrentPosition((position) => {
       setCurrentLocation({
@@ -72,6 +74,24 @@ export default function PlacesIndexContainer({
       return aDistance - bDistance;
     };
     sortedPosts.sort(compare);
+  } else {
+    const compareByDate = (
+      a: PostWithLocation,
+      b: PostWithLocation,
+    ): number => {
+      const aDate = new Date(a.createdAt);
+      const bDate = new Date(b.createdAt);
+
+      const aResult = aDate.getTime();
+      const bResult = bDate.getTime();
+
+      if (sortOrder === "新しい順") {
+        return bResult - aResult;
+      } else {
+        return aResult - bResult;
+      }
+    };
+    sortedPosts.sort(compareByDate);
   }
   return (
     <div className="p-4 flex flex-col">
@@ -102,9 +122,18 @@ export default function PlacesIndexContainer({
               >
                 現在地を取得
               </button>
+              <button className="bg-blue-500 rounded-full text-white py-2 px-4 cursor-pointer ml-2" onClick={() => setSortOrder("新しい順")}>
+  新しい順
+</button>
+
+<button className="bg-blue-500 rounded-full text-white py-2 px-4 cursor-pointer ml-2" onClick={() => setSortOrder("古い順")}>
+  古い順
+</button>
             </div>
             {currentLocation && <p>現在地を取得しました</p>}
+            
           </div>
+          
           <div className="overflow-y-auto h-[600px]">
             {sortedPosts.map((post) => {
               return (
