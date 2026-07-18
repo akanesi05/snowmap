@@ -7,8 +7,11 @@ import { signOut } from "next-auth/react";
 
 type HeaderProps = {
   session: Session | null;
+  profileUser: {
+    name: string | null;
+  } | null;
 };
-export default function Header({ session }: HeaderProps) {
+export default function Header({ session, profileUser }: HeaderProps) {
   const [openMenu, setOpenMenu] = useState(false);
   const menuFunction = () => {
     setOpenMenu((openMenu) => !openMenu);
@@ -29,7 +32,7 @@ export default function Header({ session }: HeaderProps) {
           {session && session.user ? (
             <>
               <Link href="/profile">
-                <p className="hover:text-blue-300">{session.user.name}</p>
+                <p className="hover:text-blue-300">{profileUser?.name}</p>
               </Link>
               <button className="cursor-pointer" onClick={() => signOut()}>
                 ログアウト
@@ -63,7 +66,7 @@ export default function Header({ session }: HeaderProps) {
           <ul>
             <li className="text-xl ">
               <Link href="/profile">
-                <p className="hover:text-blue-300">{session.user.name}</p>
+                <p className="hover:text-blue-300">{profileUser?.name}</p>
               </Link>
 
               <button className="mt-2 cursor-pointer" onClick={() => signOut()}>
