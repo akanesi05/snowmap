@@ -74,7 +74,7 @@ export default function PlacesIndexContainer({
     sortedPosts.sort(compare);
   }
   return (
-    <div className="bg-gray-100 p-4 flex flex-col">
+    <div className="p-4 flex flex-col">
       <div className="flex items-center gap-2 font-bold text-2xl mb-4">
         <svg
           xmlns="http://www.w3.org/2000/svg"

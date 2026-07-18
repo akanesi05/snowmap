@@ -2,8 +2,9 @@ import { auth } from "@/lib/auth";
 import { redirect ,notFound } from "next/navigation";
 import prisma from "@/lib/prisma";
 import { format } from "date-fns";
+import Link from "next/link";
 
-export default async function profile() {
+export default async function Profile() {
   const session = await auth();
   if (!session || !session.user || !session.user.id) {
     redirect("/auth/login");
@@ -19,7 +20,7 @@ export default async function profile() {
         <div className="bg-white  p-10 md:p-6 rounded-lg shadow-md">
           <div>
             <p>ユーザー名</p>
-            <p>{session.user.name}</p>
+            <p>{profileUser.name}</p>
           </div>
           <div>
             <p>メールアドレス</p>
@@ -29,6 +30,9 @@ export default async function profile() {
             <p>登録日</p>
             <p>{format(profileUser.createdAt, "yyyy/MM/dd")}</p>
           </div>
+           <Link className="hover:text-blue-300" href="/profile/edit">
+                <p>編集</p>
+            </Link>
         </div>
       </div>
    
