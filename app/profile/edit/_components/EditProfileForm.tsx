@@ -43,6 +43,7 @@ export default function EditProfileForm({ name }: EditProfileFormProps) {
         onSubmit={handleSubmit(submitEditProfile)}
       >
         <h1 className="text-2xl font-bold mb-4">プロフィール編集フォーム</h1>
+        <div className="bg-white  p-10 md:p-6 rounded-lg shadow-md">
         <p className="text-gray-800">名前</p>
         <input
           {...register("name", {
@@ -58,9 +59,9 @@ export default function EditProfileForm({ name }: EditProfileFormProps) {
         {errors.name && (
           <p className="text-red-500 text-sm mb-3">{errors.name.message}</p>
         )}
-        <p>
-          <UpdateButton />
-        </p>
+        </div>
+          <UpdateButton/>
+    
         <Link
           href="/profile"
           className="text-sm text-black pt-5 items-center inline-flex gap-1 hover:text-blue-600 underline"
