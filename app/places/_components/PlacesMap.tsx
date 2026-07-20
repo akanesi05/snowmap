@@ -18,6 +18,7 @@ type Post = {
 type PlacesMapProps = {
   posts: Post[];
   onLocationSelect?: (location: ClickedLocation) => void;
+  currentLocation?: CurrentLocation | null;
 };
 
 type ClickedLocation = {
@@ -25,8 +26,16 @@ type ClickedLocation = {
   longitude: number;
   address: string;
 };
+type CurrentLocation = {
+  latitude: number;
+  longitude: number;
+};
 
-export default function PlacesMap({ posts, onLocationSelect }: PlacesMapProps) {
+export default function PlacesMap({
+  posts,
+  onLocationSelect,
+  currentLocation,
+}: PlacesMapProps) {
   const [selectedPost, setSelectedPost] = useState<Post | null>(null);
   const mapKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
   if (!mapKey) {
@@ -42,6 +51,14 @@ export default function PlacesMap({ posts, onLocationSelect }: PlacesMapProps) {
         <Map
           style={{ width: "100%", height: "100%" }}
           defaultCenter={{ lat: 35.7056, lng: 139.7519 }}
+          center={
+            currentLocation
+              ? {
+                  lat: currentLocation.latitude,
+                  lng: currentLocation.longitude,
+                }
+              : undefined
+          }
           defaultZoom={10}
           gestureHandling="greedy"
           disableDefaultUI
