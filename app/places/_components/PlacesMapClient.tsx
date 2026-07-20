@@ -13,6 +13,7 @@ type Post = {
 type PlacesMapClientProps = {
   posts: Post[];
   onLocationSelect?: (location: ClickedLocation) => void;
+  currentLocation?: CurrentLocation | null;
 };
 
 type ClickedLocation = {
@@ -20,10 +21,17 @@ type ClickedLocation = {
   longitude: number;
   address: string;
 };
+
+type CurrentLocation = {
+  latitude: number;
+  longitude: number;
+};
+
 const PlacesMap = dynamic(() => import("./PlacesMap"), { ssr: false });
 export default function PlacesMapClient({
   posts,
   onLocationSelect,
+  currentLocation
 }: PlacesMapClientProps) {
-  return <PlacesMap posts={posts} onLocationSelect={onLocationSelect} />;
+  return <PlacesMap posts={posts} onLocationSelect={onLocationSelect} currentLocation={currentLocation} />;
 }

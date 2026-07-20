@@ -169,7 +169,7 @@ export default function PlacesIndexContainer({
           </div>
         </div>
         <div className="md:w-3/5 md:h-[600px] relative rounded-lg overflow-hidden border w-full order-1 md:order-2 h-[300px]">
-          <PlacesMapClient posts={posts} />
+          <PlacesMapClient posts={posts} currentLocation={currentLocation} />
         </div>
       </div>
     </div>
