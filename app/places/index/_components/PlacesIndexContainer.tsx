@@ -58,12 +58,14 @@ export default function PlacesIndexContainer({
     useState<CurrentLocation | null>(null);
 
   const [sortOrder, setSortOrder] = useState("新しい順");
+  const [page, setPage] = useState(1);
   const handleGetCurrentLocation = () => {
     navigator.geolocation.getCurrentPosition((position) => {
       setCurrentLocation({
         latitude: position.coords.latitude,
         longitude: position.coords.longitude,
       });
+      setPage(1);
     });
   };
   const sortedPosts = [...posts];
@@ -93,6 +95,11 @@ export default function PlacesIndexContainer({
     };
     sortedPosts.sort(compareByDate);
   }
+  const PER_PAGE = 6;
+  const startIndex = (page - 1) * PER_PAGE;
+  const endIndex = startIndex + PER_PAGE;
+  const currentPosts = sortedPosts.slice(startIndex, endIndex);
+  const totalPages = Math.ceil(sortedPosts.length / PER_PAGE);
   return (
     <div className="p-4 flex flex-col">
       <div className="flex items-center gap-2 font-bold text-2xl mb-4">
@@ -119,23 +126,35 @@ export default function PlacesIndexContainer({
               <button
                 className="bg-blue-500 rounded-full text-white py-2 px-4 cursor-pointer"
                 onClick={handleGetCurrentLocation}
+                  
               >
                 現在地を取得
               </button>
-              <button className="bg-blue-500 rounded-full text-white py-2 px-4 cursor-pointer ml-2" onClick={() => setSortOrder("新しい順")}>
-  新しい順
-</button>
+              <button
+                className="bg-blue-500 rounded-full text-white py-2 px-4 cursor-pointer ml-2"
+                onClick={() => {
+                  setSortOrder("新しい順");
+                  setPage(1);
+                }}
+              >
+                新しい順
+              </button>
 
-<button className="bg-blue-500 rounded-full text-white py-2 px-4 cursor-pointer ml-2" onClick={() => setSortOrder("古い順")}>
-  古い順
-</button>
+              <button
+                className="bg-blue-500 rounded-full text-white py-2 px-4 cursor-pointer ml-2"
+                onClick={() => {
+                  setSortOrder("古い順");
+                  setPage(1);
+                }}
+              >
+                古い順
+              </button>
             </div>
             {currentLocation && <p>現在地を取得しました</p>}
-            
           </div>
-          
+
           <div className="overflow-y-auto h-[600px]">
-            {sortedPosts.map((post) => {
+            {currentPosts.map((post) => {
               return (
                 <div className="py-2" key={post.id}>
                   <div className="bg-white p-4 md:p-6 rounded-lg shadow-md">
@@ -166,6 +185,32 @@ export default function PlacesIndexContainer({
                 </div>
               );
             })}
+          </div>
+          <div className="flex justify-center gap-4">
+            <button className="rounded bg-gray-800 px-4 py-2 text-white disabled:cursor-not-allowed disabled:opacity-40" onClick={() => setPage(page - 1)} disabled={page === 1}>
+              前へ
+            </button>
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map(
+    (pageNumber) => (
+      <button className={
+  page === pageNumber
+    ? "rounded bg-blue-500 px-3 py-2 text-white"
+    : "rounded bg-gray-200 px-3 py-2"
+}
+        key={pageNumber}
+        onClick={() => setPage(pageNumber)}
+      >
+        {pageNumber}
+      </button>
+    ),
+  )}
+            <button
+              className="rounded bg-gray-800 px-4 py-2 text-white disabled:cursor-not-allowed disabled:opacity-40"
+              onClick={() => setPage(page + 1)}
+              disabled={page >= totalPages}
+            >
+              次へ
+            </button>
           </div>
         </div>
         <div className="md:w-3/5 md:h-[600px] relative rounded-lg overflow-hidden border w-full order-1 md:order-2 h-[300px]">
