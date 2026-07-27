@@ -42,6 +42,9 @@ export default function Footer() {
             <Link href="/privacy" className="text-gray-200 hover:underline">
               プライバシーポリシー
             </Link>
+            <Link href="/postprivacy" className="text-gray-200 hover:underline">
+              投稿ポリシー
+            </Link>
             <a
               href="https://docs.google.com/forms/d/e/1FAIpQLSfhbbVHSebxNxt1uq_hDArf6wAcC-7dvaB_wUdftozGFwyZGg/viewform?usp=publish-editor"
               target="_blank"
