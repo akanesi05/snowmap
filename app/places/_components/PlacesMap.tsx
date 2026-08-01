@@ -37,6 +37,7 @@ export default function PlacesMap({
   currentLocation,
 }: PlacesMapProps) {
   const [selectedPost, setSelectedPost] = useState<Post | null>(null);
+  const [searchedLocation, setSearchedLocation] = useState<CurrentLocation | null>(null);
   const mapKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
   if (!mapKey) {
     return <p>APIキーがありません</p>;
@@ -48,6 +49,16 @@ export default function PlacesMap({
   return (
     <div className="w-full h-full relative">
       <APIProvider apiKey={mapKey}>
+        <label >住所を指定して移動:</label>
+
+<input
+  type="text"
+  id="name"
+  name="name"
+  required
+  
+  
+  /><button>検索</button>
         <Map
           style={{ width: "100%", height: "100%" }}
           defaultCenter={{ lat: 35.7056, lng: 139.7519 }}
