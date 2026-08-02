@@ -37,7 +37,9 @@ export default function PlacesMap({
   currentLocation,
 }: PlacesMapProps) {
   const [selectedPost, setSelectedPost] = useState<Post | null>(null);
-  const [searchedLocation, setSearchedLocation] = useState<CurrentLocation | null>(null);
+  const [searchedLocation, setSearchedLocation] =
+    useState<CurrentLocation | null>(null);
+  const [placeName, setPlaceName] = useState<string>("");
   const mapKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
   if (!mapKey) {
     return <p>APIキーがありません</p>;
@@ -46,29 +48,45 @@ export default function PlacesMap({
   const mapPosts = posts.filter((post) => {
     return post.latitude != null && post.longitude != null;
   });
+
+  const searchPlace = async () => {
+    if (placeName === "") return;
+
+    const res = await fetch("/api/geocode", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ placeName }),
+    });
+
+    const data = await res.json();
+    setSearchedLocation(data);
+  };
   return (
     <div className="w-full h-full relative">
       <APIProvider apiKey={mapKey}>
-        <label >住所を指定して移動:</label>
+        <label>住所を指定して移動:</label>
 
-<input
-  type="text"
-  id="name"
-  name="name"
-  required
-  
-  
-  /><button>検索</button>
+        <input
+          type="text"
+          value={placeName}
+          onChange={(event) => setPlaceName(event.target.value)}
+        />
+        <button onClick={searchPlace}>検索</button>
         <Map
           style={{ width: "100%", height: "100%" }}
           defaultCenter={{ lat: 35.7056, lng: 139.7519 }}
           center={
-            currentLocation
+            searchedLocation
               ? {
-                  lat: currentLocation.latitude,
-                  lng: currentLocation.longitude,
+                  lat: searchedLocation.latitude,
+                  lng: searchedLocation.longitude,
                 }
-              : undefined
+              : currentLocation
+                ? {
+                    lat: currentLocation.latitude,
+                    lng: currentLocation.longitude,
+                  }
+                : undefined
           }
           defaultZoom={10}
           gestureHandling="greedy"
