@@ -4,8 +4,9 @@ import {
   Map,
   Marker,
   InfoWindow,
+  useMap
 } from "@vis.gl/react-google-maps";
-import { useState } from "react";
+import { useState,useEffect  } from "react";
 type Post = {
   id: string;
   title: string;
@@ -31,6 +32,10 @@ type CurrentLocation = {
   longitude: number;
 };
 
+type CurrentLocationMoveProps = {
+  currentLocation?: CurrentLocation | null;
+};
+
 export default function PlacesMap({
   posts,
   onLocationSelect,
@@ -44,7 +49,6 @@ export default function PlacesMap({
   if (!mapKey) {
     return <p>APIキーがありません</p>;
   }
-
   const mapPosts = posts.filter((post) => {
     return post.latitude != null && post.longitude != null;
   });
@@ -61,6 +65,25 @@ export default function PlacesMap({
     const data = await res.json();
     setSearchedLocation(data);
   };
+
+ function CurrentLocationMove({
+  currentLocation,
+}: CurrentLocationMoveProps) {
+  const map = useMap();
+
+  useEffect(() => {
+    if (!map || !currentLocation) return;
+
+    const latLng = {
+      lat: currentLocation.latitude,
+      lng: currentLocation.longitude,
+    };
+
+    map.panTo(latLng);
+  }, [map, currentLocation]);
+
+  return null;
+}
   return (
     <div className="w-full h-full relative">
       <APIProvider apiKey={mapKey}>
@@ -81,11 +104,6 @@ export default function PlacesMap({
                   lat: searchedLocation.latitude,
                   lng: searchedLocation.longitude,
                 }
-              : currentLocation
-                ? {
-                    lat: currentLocation.latitude,
-                    lng: currentLocation.longitude,
-                  }
                 : undefined
           }
           defaultZoom={10}
@@ -142,6 +160,7 @@ export default function PlacesMap({
               </div>
             </InfoWindow>
           )}
+          <CurrentLocationMove currentLocation={currentLocation} />
         </Map>
       </APIProvider>
     </div>
