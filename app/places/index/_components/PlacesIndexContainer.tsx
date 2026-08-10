@@ -126,29 +126,22 @@ export default function PlacesIndexContainer({
               <button
                 className="bg-blue-500 rounded-full text-white py-2 px-4 cursor-pointer"
                 onClick={handleGetCurrentLocation}
-                  
               >
                 現在地を取得
               </button>
-              <button
-                className="bg-blue-500 rounded-full text-white py-2 px-4 cursor-pointer ml-2"
-                onClick={() => {
-                  setSortOrder("新しい順");
-                  setPage(1);
-                }}
-              >
-                新しい順
-              </button>
+              <select
+                name="sort"
+                id="sort-select"
+                value={sortOrder}
+                onChange={(event) => {
+                  setSortOrder(event.target.value);
 
-              <button
-                className="bg-blue-500 rounded-full text-white py-2 px-4 cursor-pointer ml-2"
-                onClick={() => {
-                  setSortOrder("古い順");
                   setPage(1);
                 }}
               >
-                古い順
-              </button>
+                <option value="新しい順">新しい順</option>
+                <option value="古い順">古い順</option>
+              </select>
             </div>
             {currentLocation && <p>現在地を取得しました</p>}
           </div>
@@ -187,23 +180,28 @@ export default function PlacesIndexContainer({
             })}
           </div>
           <div className="flex justify-center gap-4">
-            <button className="rounded bg-gray-800 px-4 py-2 text-white disabled:cursor-not-allowed disabled:opacity-40" onClick={() => setPage(page - 1)} disabled={page === 1}>
+            <button
+              className="rounded bg-gray-800 px-4 py-2 text-white disabled:cursor-not-allowed disabled:opacity-40"
+              onClick={() => setPage(page - 1)}
+              disabled={page === 1}
+            >
               前へ
             </button>
             {Array.from({ length: totalPages }, (_, i) => i + 1).map(
-    (pageNumber) => (
-      <button className={
-  page === pageNumber
-    ? "rounded bg-blue-500 px-3 py-2 text-white"
-    : "rounded bg-gray-200 px-3 py-2"
-}
-        key={pageNumber}
-        onClick={() => setPage(pageNumber)}
-      >
-        {pageNumber}
-      </button>
-    ),
-  )}
+              (pageNumber) => (
+                <button
+                  className={
+                    page === pageNumber
+                      ? "rounded bg-blue-500 px-3 py-2 text-white"
+                      : "rounded bg-gray-200 px-3 py-2"
+                  }
+                  key={pageNumber}
+                  onClick={() => setPage(pageNumber)}
+                >
+                  {pageNumber}
+                </button>
+              ),
+            )}
             <button
               className="rounded bg-gray-800 px-4 py-2 text-white disabled:cursor-not-allowed disabled:opacity-40"
               onClick={() => setPage(page + 1)}
