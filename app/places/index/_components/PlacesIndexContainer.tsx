@@ -141,6 +141,7 @@ export default function PlacesIndexContainer({
               >
                 <option value="新しい順">新しい順</option>
                 <option value="古い順">古い順</option>
+                <option value="近い順">近い順</option>
               </select>
             </div>
             {currentLocation && <p>現在地を取得しました</p>}
