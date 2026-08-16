@@ -69,7 +69,7 @@ export default function PlacesIndexContainer({
     });
   };
   const sortedPosts = [...posts];
-  if (currentLocation) {
+  if (currentLocation && sortOrder === "近い順") {
     const compare = (a: PostWithLocation, b: PostWithLocation): number => {
       const aDistance = calculate({ post: a, currentLocation });
       const bDistance = calculate({ post: b, currentLocation });
@@ -89,8 +89,10 @@ export default function PlacesIndexContainer({
 
       if (sortOrder === "新しい順") {
         return bResult - aResult;
+      } else if (sortOrder === "古い順"){ 
+        return aResult - bResult; 
       } else {
-        return aResult - bResult;
+        return 0;
       }
     };
     sortedPosts.sort(compareByDate);
@@ -139,9 +141,9 @@ export default function PlacesIndexContainer({
                   setPage(1);
                 }}
               >
-                <option value="新しい順">新しい順</option>
-                <option value="古い順">古い順</option>
-                <option value="近い順">近い順</option>
+                <option value="新しい順">新しい順(作成日時)</option>
+                <option value="古い順">古い順(作成日時)</option>
+                <option value="近い順">近い順(現在地)</option>
               </select>
             </div>
             {currentLocation && <p>現在地を取得しました</p>}
