@@ -16,7 +16,7 @@ type PostWithLocation = {
 
 export default async function PlacesIndexPage() {
   const session = await auth();
-  const posts = await prisma.sanctuaries.findMany();
+  const posts = await prisma.sanctuaries.findMany({ orderBy: { createdAt: "desc" } });
   const mapPosts = posts.filter((post): post is PostWithLocation => {
     return post.latitude !== null && post.longitude !== null;
   });
