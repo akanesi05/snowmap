@@ -12,3 +12,16 @@ export async function addFavorite(placeId: string) {
     });
   }
 }
+
+export async function releaseFavorite(placeId: string) {
+  "use server";
+
+  const session = await auth();
+
+  if (session && session.user && session.user.id) {
+    await prisma.user.update({
+      where: { id: session.user.id },
+      data: { favoritedSanctuaries: { disconnect: { id: placeId } } },
+    });
+  }
+}

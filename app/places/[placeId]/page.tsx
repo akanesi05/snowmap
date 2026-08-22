@@ -6,6 +6,7 @@ import { ArrowLeft, MapPin, Calendar, NotebookText } from "lucide-react";
 import { auth } from "@/lib/auth";
 import DeleteButton from "../../_components/DeleteButton";
 import { addFavorite } from "./actions";
+import { releaseFavorite } from "./actions";
 interface PlacesDetailPageProps {
   params: {
     placeId: string;
@@ -71,9 +72,15 @@ export default async function PlacesPage({ params }: PlacesDetailPageProps) {
                   </>
                 )}
             </div>
-            <form action={addFavorite.bind(null, placeId)}>
-              <button type="submit">お気に入りに追加</button>
-            </form>
+            isFavorite ? (
+              <form action={releaseFavorite.bind(null, placeId)}>
+                <button type="submit">お気に入り解除</button>
+              </form>
+            ) : (
+              <form action={addFavorite.bind(null, placeId)}>
+                <button type="submit">お気に入りに追加</button>
+              </form>
+            )
             </>
           )}
         </div>
