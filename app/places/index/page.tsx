@@ -2,6 +2,8 @@ import prisma from "@/lib/prisma";
 import PlacesIndexContainer from "./_components/PlacesIndexContainer";
 import { auth } from "@/lib/auth";
 
+
+
 type PostWithLocation = {
   id: string;
   title: string;
@@ -12,11 +14,32 @@ type PostWithLocation = {
   longitude: number;
   createdAt: Date;
   updatedAt: Date;
+  favoritedUsers: {
+  id: string;
+  name: string;
+  email: string;
+  passwordHash: string;
+  createdAt: Date;
+  updatedAt: Date;
+}[];
 };
 
 export default async function PlacesIndexPage() {
   const session = await auth();
-  const posts = await prisma.sanctuaries.findMany({ orderBy: { createdAt: "desc" } });
+  const posts = await prisma.sanctuaries.findMany({
+  orderBy: {
+    createdAt: "desc",
+  },
+  include: {
+    favoritedUsers: session?.user?.id
+      ? {
+          where: {
+            id: session.user.id,
+          },
+        }
+      : false,
+  },
+});
   const mapPosts = posts.filter((post): post is PostWithLocation => {
     return post.latitude !== null && post.longitude !== null;
   });
