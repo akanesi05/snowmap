@@ -1,5 +1,6 @@
 import prisma from "@/lib/prisma";
 import { auth } from "@/lib/auth";
+import { revalidatePath } from "next/cache";
 export async function addFavorite(placeId: string) {
   "use server";
 
@@ -11,6 +12,7 @@ export async function addFavorite(placeId: string) {
       data: { favoritedSanctuaries: { connect: { id: placeId } } },
     });
   }
+  revalidatePath(`/places/${placeId}`);
 }
 
 export async function releaseFavorite(placeId: string) {
@@ -23,5 +25,6 @@ export async function releaseFavorite(placeId: string) {
       where: { id: session.user.id },
       data: { favoritedSanctuaries: { disconnect: { id: placeId } } },
     });
+    revalidatePath(`/places/${placeId}`);
   }
 }

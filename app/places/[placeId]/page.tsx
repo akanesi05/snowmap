@@ -6,6 +6,7 @@ import { ArrowLeft, MapPin, Calendar, NotebookText,Star} from "lucide-react";
 import { auth } from "@/lib/auth";
 import DeleteButton from "../../_components/DeleteButton";
 import { addFavorite,releaseFavorite } from "./actions";
+import { revalidatePath } from "next/cache";
 
 
 interface PlacesDetailPageProps {
