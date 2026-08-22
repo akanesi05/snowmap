@@ -2,11 +2,12 @@ import prisma from "@/lib/prisma";
 import EditButton from "../../_components/EditButton";
 import { format } from "date-fns";
 import Link from "next/link";
-import { ArrowLeft, MapPin, Calendar, NotebookText } from "lucide-react";
+import { ArrowLeft, MapPin, Calendar, NotebookText,Star} from "lucide-react";
 import { auth } from "@/lib/auth";
 import DeleteButton from "../../_components/DeleteButton";
-import { addFavorite } from "./actions";
-import { releaseFavorite } from "./actions";
+import { addFavorite,releaseFavorite } from "./actions";
+
+
 interface PlacesDetailPageProps {
   params: {
     placeId: string;
@@ -24,6 +25,21 @@ export default async function PlacesPage({ params }: PlacesDetailPageProps) {
     return <div className="text-center text-sm my-10">聖地がありません</div>;
   }
   const session = await auth();
+  let user = null;
+
+if (session && session.user && session.user.id) {
+  user = await prisma.user.findUnique({
+    where: {
+      id: session.user.id,
+    },
+    include: {
+      favoritedSanctuaries: true,
+    },
+  });
+}
+  const isFavorite = user?.favoritedSanctuaries.some((sanctuary) => {
+  return sanctuary.id === placeId;
+});
   return (
     <div className="bg-gray-50 py-8 px-6 min-h-screen">
       <div className="max-w-3xl mx-auto">
@@ -72,16 +88,21 @@ export default async function PlacesPage({ params }: PlacesDetailPageProps) {
                   </>
                 )}
             </div>
-            isFavorite ? (
-              <form action={releaseFavorite.bind(null, placeId)}>
-                <button type="submit">お気に入り解除</button>
+            
+            {isFavorite ? (
+              <form action={releaseFavorite.bind(null, placeId)} className="text-sm text-gray-500">
+                <button type="submit" className="flex items-center gap-1">お気に入り済み<Star fill="yellow" /></button>
               </form>
+              
             ) : (
-              <form action={addFavorite.bind(null, placeId)}>
-                <button type="submit">お気に入りに追加</button>
+              <form action={addFavorite.bind(null, placeId)} className="text-sm">
+                <button type="submit" className="flex items-center gap-1">
+                  お気に入りに追加
+                  <Star />
+                </button>
               </form>
-            )
-            </>
+            )}
+          </> 
           )}
         </div>
       </div>
