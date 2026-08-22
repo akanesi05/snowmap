@@ -4,6 +4,7 @@ import EditButton from "../../../_components/EditButton";
 import Link from "next/link";
 import PlacesMapClient from "../../_components/PlacesMapClient";
 import type { Session } from "next-auth";
+import { Star } from "lucide-react";
 
 type PostWithLocation = {
   id: string;
@@ -14,6 +15,14 @@ type PostWithLocation = {
   longitude: number;
   createdAt: Date;
   updatedAt: Date;
+  favoritedUsers: {
+    id: string;
+    name: string;
+    email: string;
+    passwordHash: string;
+    createdAt: Date;
+    updatedAt: Date;
+  }[];
 };
 
 type PlacesIndexContainerProps = {
@@ -89,8 +98,8 @@ export default function PlacesIndexContainer({
 
       if (sortOrder === "新しい順") {
         return bResult - aResult;
-      } else if (sortOrder === "古い順"){ 
-        return aResult - bResult; 
+      } else if (sortOrder === "古い順") {
+        return aResult - bResult;
       } else {
         return 0;
       }
@@ -151,12 +160,19 @@ export default function PlacesIndexContainer({
 
           <div className="overflow-y-auto h-[600px]">
             {currentPosts.map((post) => {
+              const isFavorite = post.favoritedUsers.length > 0;
               return (
                 <div className="py-2" key={post.id}>
                   <div className="bg-white p-4 md:p-6 rounded-lg shadow-md">
                     <h2 className="text-lg text-gray-900 font-medium title-font mb-4">
                       {post.title}
                     </h2>
+                    {isFavorite && (
+                      <Star
+                        className="fill-yellow-400 text-yellow-400"
+                        size={20}
+                      />
+                    )}
                     <h2 className="text-sm text-gray-600 font-medium title-font mb-4">
                       {post.address}
                     </h2>
