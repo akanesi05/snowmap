@@ -2,12 +2,10 @@ import prisma from "@/lib/prisma";
 import EditButton from "../../_components/EditButton";
 import { format } from "date-fns";
 import Link from "next/link";
-import { ArrowLeft, MapPin, Calendar, NotebookText,Star} from "lucide-react";
+import { ArrowLeft, MapPin, Calendar, NotebookText, Star } from "lucide-react";
 import { auth } from "@/lib/auth";
 import DeleteButton from "../../_components/DeleteButton";
-import { addFavorite,releaseFavorite } from "./actions";
-import { revalidatePath } from "next/cache";
-
+import { addFavorite, releaseFavorite } from "./actions";
 
 interface PlacesDetailPageProps {
   params: {
@@ -16,6 +14,7 @@ interface PlacesDetailPageProps {
 }
 export default async function PlacesPage({ params }: PlacesDetailPageProps) {
   const { placeId } = await params;
+
   const post = await prisma.sanctuaries.findUnique({
     where: { id: placeId },
     include: {
@@ -26,21 +25,22 @@ export default async function PlacesPage({ params }: PlacesDetailPageProps) {
     return <div className="text-center text-sm my-10">聖地がありません</div>;
   }
   const session = await auth();
-  let user = null;
 
-if (session && session.user && session.user.id) {
-  user = await prisma.user.findUnique({
-    where: {
-      id: session.user.id,
-    },
-    include: {
-      favoritedSanctuaries: true,
-    },
-  });
-}
+  const user =
+    session && session.user && session.user.id
+      ? await prisma.user.findUnique({
+          where: {
+            id: session.user.id,
+          },
+          include: {
+            favoritedSanctuaries: true,
+          },
+        })
+      : null;
+
   const isFavorite = user?.favoritedSanctuaries.some((sanctuary) => {
-  return sanctuary.id === placeId;
-});
+    return sanctuary.id === placeId;
+  });
   return (
     <div className="bg-gray-50 py-8 px-6 min-h-screen">
       <div className="max-w-3xl mx-auto">
@@ -79,31 +79,39 @@ if (session && session.user && session.user.id) {
           </div>
           {session && (
             <>
-            <div className="pt-4 gap-3 flex">
-              <EditButton href={`/places/${post.id}/edit`} />
-              {session.user &&
-                session.user.id &&
-                session.user.id === post.userId && (
-                  <>
-                    <DeleteButton id={post.id} />
-                  </>
-                )}
-            </div>
-            
-            {isFavorite ? (
-              <form action={releaseFavorite.bind(null, placeId)} className="text-sm text-gray-500">
-                <button type="submit" className="flex items-center gap-1">お気に入り済み<Star fill="yellow" /></button>
-              </form>
-              
-            ) : (
-              <form action={addFavorite.bind(null, placeId)} className="text-sm">
-                <button type="submit" className="flex items-center gap-1">
-                  お気に入りに追加
-                  <Star />
-                </button>
-              </form>
-            )}
-          </> 
+              <div className="pt-4 gap-3 flex">
+                <EditButton href={`/places/${post.id}/edit`} />
+                {session.user &&
+                  session.user.id &&
+                  session.user.id === post.userId && (
+                    <>
+                      <DeleteButton id={post.id} />
+                    </>
+                  )}
+              </div>
+
+              {isFavorite ? (
+                <form
+                  action={releaseFavorite.bind(null, placeId)}
+                  className="text-sm text-gray-500"
+                >
+                  <button type="submit" className="flex items-center gap-1">
+                    お気に入り済み
+                    <Star fill="yellow" />
+                  </button>
+                </form>
+              ) : (
+                <form
+                  action={addFavorite.bind(null, placeId)}
+                  className="text-sm"
+                >
+                  <button type="submit" className="flex items-center gap-1">
+                    お気に入りに追加
+                    <Star />
+                  </button>
+                </form>
+              )}
+            </>
           )}
         </div>
       </div>
