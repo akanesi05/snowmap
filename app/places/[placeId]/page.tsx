@@ -5,7 +5,7 @@ import Link from "next/link";
 import { ArrowLeft, MapPin, Calendar, NotebookText } from "lucide-react";
 import { auth } from "@/lib/auth";
 import DeleteButton from "../../_components/DeleteButton";
-
+import { addFavorite } from "./actions";
 interface PlacesDetailPageProps {
   params: {
     placeId: string;
@@ -60,6 +60,7 @@ export default async function PlacesPage({ params }: PlacesDetailPageProps) {
             <p>作成者: {post.user?.name}</p>
           </div>
           {session && (
+            <>
             <div className="pt-4 gap-3 flex">
               <EditButton href={`/places/${post.id}/edit`} />
               {session.user &&
@@ -70,6 +71,10 @@ export default async function PlacesPage({ params }: PlacesDetailPageProps) {
                   </>
                 )}
             </div>
+            <form action={addFavorite.bind(null, placeId)}>
+              <button type="submit">お気に入りに追加</button>
+            </form>
+            </>
           )}
         </div>
       </div>
