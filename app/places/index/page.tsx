@@ -37,7 +37,11 @@ export default async function PlacesIndexPage() {
             id: session.user.id,
           },
         }
-      : false,
+      : {
+      where: {
+        id: "",
+      },
+    },
   },
 });
   const mapPosts = posts.filter((post): post is PostWithLocation => {
