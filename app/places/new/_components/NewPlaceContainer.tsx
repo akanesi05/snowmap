@@ -18,11 +18,17 @@ type Post = {
   longitude: number;
 };
 
-type NewPlaceContainerProps = {
-  posts: Post[];
+type Member = {
+  id: string;
+  name: string;
 };
 
-export default function NewPlaceContainer({ posts }: NewPlaceContainerProps) {
+type NewPlaceContainerProps = {
+  posts: Post[];
+  members: Member[];
+};
+
+export default function NewPlaceContainer({ posts, members }: NewPlaceContainerProps) {
   const [selectedLocation, setSelectedLocation] =
     useState<ClickedLocation | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -61,7 +67,7 @@ export default function NewPlaceContainer({ posts }: NewPlaceContainerProps) {
           {isModalOpen && (
             <div className="absolute inset-0 bg-black/40 flex items-center justify-center z-10">
               <div className="bg-white text-black rounded-2xl p-6 shadow-xl w-[90%] max-w-[400px] max-h-[90%] overflow-y-auto">
-                <NewPlaceForm selectedLocation={selectedLocation} />
+                <NewPlaceForm selectedLocation={selectedLocation} members={members} />
                 <button onClick={closeModal} className="cursor-pointer">
                   閉じる
                 </button>

@@ -15,8 +15,9 @@ type PostWithLocation = {
 
 export default async function PlacesNewPage() {
   const posts = await prisma.sanctuaries.findMany();
+  const members = await prisma.member.findMany();
   const mapPosts = posts.filter((post): post is PostWithLocation => {
     return post.latitude !== null && post.longitude !== null;
   });
-  return <NewPlaceContainer posts={mapPosts} />;
+  return <NewPlaceContainer posts={mapPosts} members={members} />;
 }
