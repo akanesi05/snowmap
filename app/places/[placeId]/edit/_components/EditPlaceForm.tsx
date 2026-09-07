@@ -35,6 +35,7 @@ export default function EditPlaceForm(props: EditPlaceFormProps) {
           title: data.title,
           address: data.address,
           explanation: data.explanation,
+          
         }),
       });
       if (res.ok) {

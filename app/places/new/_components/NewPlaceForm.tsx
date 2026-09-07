@@ -9,10 +9,12 @@ type FormValues = {
   title: string;
   explanation: string;
   address: string;
+  members: string[];
 };
 
 type NewPlaceFormProps = {
   selectedLocation: ClickedLocation | null;
+  members: Member[];
 };
 
 type ClickedLocation = {
@@ -21,7 +23,13 @@ type ClickedLocation = {
   address: string;
 };
 
-export default function NewPlaceForm({ selectedLocation }: NewPlaceFormProps) {
+type Member = {
+  id: string;
+  name: string;
+};
+
+
+export default function NewPlaceForm({ selectedLocation, members }: NewPlaceFormProps) {
   const router = useRouter();
   const {
     register,
@@ -49,6 +57,7 @@ export default function NewPlaceForm({ selectedLocation }: NewPlaceFormProps) {
           explanation: data.explanation,
           latitude: selectedLocation.latitude,
           longitude: selectedLocation.longitude,
+          members: data.members,
         }),
       });
 
@@ -108,6 +117,16 @@ export default function NewPlaceForm({ selectedLocation }: NewPlaceFormProps) {
       {errors.address && (
         <p className="text-red-500 text-sm mb-3">{errors.address.message}</p>
       )}
+      {members.map((member) => (
+  <label key={member.id}>
+    <input
+      type="checkbox"
+      {...register("members")}
+      value={member.id}
+    />
+    {member.name}
+  </label>
+))}
       <p>投稿日: {format(new Date(), "yyyy/MM/dd")}</p>
       <p className="text-gray-600 text-xs pb-3">
         投稿日は投稿時に自動で記録されます
