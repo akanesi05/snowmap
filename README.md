@@ -94,6 +94,7 @@ https://snowmap-sigma.vercel.app/
 - 聖地の削除（投稿者本人のみ可能）
 - 場所名、住所、説明文の登録
 - 住所から緯度・経度を取得して保存
+- 聖地に関連するSnow Manメンバーを登録
 
 ### 聖地一覧
 - 投稿された聖地の一覧表示
@@ -101,16 +102,20 @@ https://snowmap-sigma.vercel.app/
 - 現在地の取得
 - 現在地から聖地までの距離表示
 - 現在地から近い順への並び替え
+- 新しい順・古い順への並び替え
+- 場所名から地図を検索
+- ページネーションによる一覧表示
 
 ### 聖地詳細
 - 聖地の詳細情報を表示
 - 投稿者名を表示
 
 ## 今後実装したい機能
-
-- お気に入り機能
+- お気に入りした聖地の一覧表示
+- 一覧と詳細の聖地にメンバーも表示できるようにする
 - 訪問記録機能
 - メンバー・カテゴリごとの絞り込み
+- 訪問率・ランキング機能
 
 
 
@@ -194,8 +199,16 @@ erDiagram
         datetime createdAt
         datetime updatedAt
     }
-  
+    
+    members {
+        string id PK
+        string name UK
+    }
+
   users ||--o{ accounts : "1人のUserは、0個以上のAccountを持つ"
   users ||--o{ sessions : "1人のUserは、0個以上のSessionを持つ"
   users o|--o{ sanctuaries : "1人のUserは、0件以上の聖地を投稿する"
+  users }o--o{ sanctuaries : "Userは聖地をお気に入りできる" 
+  sanctuaries }o--o{ members : "聖地には複数のMemberを関連付けられる"
+
 ```
